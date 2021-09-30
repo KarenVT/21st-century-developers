@@ -1,0 +1,52 @@
+.formulario{
+    height: 300px;
+    width: 300px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #231942;
+    padding: 80px;
+    margin: auto;
+    font-size: 20px;
+    box-shadow: 1px 1px 40px 0 black;
+    border-radius: 30pc;
+}
+
+.titulo{
+    text-align:center;
+    font-weight: 20px;
+}
+
+table{
+    margin: 10px auto;
+}
+
+input{
+    margin: 10px auto;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 5px;
+    border: transparent;
+}
+
+button{
+    margin: 5px auto;
+    font-size: 20px;
+    background: #231942;
+    color: white;
+    width: 250px;
+    height: 30px;
+    border-radius: 20px;
+    border: transparent;
+}
+
+button:hover{
+    background: #5e548e;
+    color: #fff;
+}
+
+button:active{
+    background: #9f86c0;
+    color: #fff;
+}
+
+

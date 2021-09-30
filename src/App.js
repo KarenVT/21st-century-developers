@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import GestionUsuariosRoles from './components/GestionUsuariosRoles';
+import RegistroDeVentas from './components/RegistroDeVentas';
+import RegistroProductos from './components/RegistroProductos';
+import Ventas from './components/Ventas';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import Acceso from './components/Acceso';
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Route exact path="/" component={Acceso}/>
+        <Route exact path="/registroventas" component={RegistroDeVentas} />
+        <Route exact path="/registroproductos" component={RegistroProductos} />
+        <Route exact path="/ventas" component={Ventas} />
+        <Route exact path="/roles" component={GestionUsuariosRoles} />
+      </Router>
     </div>
   );
 }

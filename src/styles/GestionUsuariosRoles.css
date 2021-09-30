@@ -1,0 +1,24 @@
+.principal{
+    text-align: center;
+    background: #373f47;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #231942;
+    padding: 80px;
+    margin: auto;
+    font-size: 20px;
+    box-shadow: 1px 1px 40px 0 black;
+    border-radius: 30pc;
+}
+
+.titulo{
+    text-align:center;
+    font-weight: 20px;
+}
+
+.datos  {
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 5px;
+    border: transparent;
+    margin: 10px;
+}
