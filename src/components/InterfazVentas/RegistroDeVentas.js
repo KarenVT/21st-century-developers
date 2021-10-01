@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/RegistroDeVentas.css';
+import '../../styles/RegistroDeVentas.css';
 
 export default class RegistroDeVentas extends Component {
     render() {

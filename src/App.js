@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import GestionUsuariosRoles from './components/GestionUsuariosRoles';
-import RegistroDeVentas from './components/RegistroDeVentas';
-import RegistroProductos from './components/RegistroProductos';
-import Ventas from './components/Ventas';
+import GestionUsuariosRoles from './components/InterfazRoles/GestionUsuariosRoles';
+import RegistroDeVentas from './components/InterfazVentas/RegistroDeVentas';
+import RegistroProductos from './components/InterfazProductos/RegistroProductos';
+import Ventas from './components/InterfazVentas/Ventas';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Acceso from './components/Acceso';
 

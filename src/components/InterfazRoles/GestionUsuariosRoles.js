@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/GestionUsuariosRoles.css';
+import '../../styles/GestionUsuariosRoles.css';
 import { Link } from "react-router-dom";
 
 

@@ -1,0 +1,41 @@
+.padre2{
+    display: flex;/*para que esten uno al lado del otro*/
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 1px 40px 0 black;
+    border-radius: 3pc;
+    margin: auto;
+    height: 350px;
+    width: 500px;
+ 
+    
+}
+.formulario2{
+    text-align: center;
+    color: #231942;
+    padding: 25px 0px;
+    font-size: 20px;
+    height: 300px;
+    width: 300px;
+}
+.titulo{
+    text-align:right;
+    font-weight: 20px;
+}
+
+input{
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 5px;
+    border: transparent;
+}
+
+
+
+footer {
+    font-size: 20px;
+    color: #160e2e;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    
+}

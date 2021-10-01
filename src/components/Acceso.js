@@ -29,7 +29,7 @@ export default class Acceso extends Component {
                             </tr>
                         </table>
                         <div>
-                            <Link to="/administrador">
+                            <Link to="/">
                                 <button >Ingresar</button>
                             </Link>
                         </div>
