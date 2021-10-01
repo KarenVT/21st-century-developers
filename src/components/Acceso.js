@@ -12,18 +12,18 @@ export default class Acceso extends Component {
                 <section class="padre">
                     <form class="formulario">
                         <div class="titulo">
-                            <h2>USER LOGIN</h2>
+                            <h2>User Login</h2>
                         </div>
                         <table>
                             <tr>
                                 <td>
-                                    USUARIO
+                                    Usuario
                                     <input type="text" placeholder="Usuario"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    CONTRASEÑA
+                                    Contraseña
                                     <input type="password" placeholder="Contraseña"></input>
                                 </td>
                             </tr>
