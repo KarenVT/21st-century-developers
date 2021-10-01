@@ -1,0 +1,45 @@
+
+.padre2{
+    display: flex;/*para que esten uno al lado del otro*/
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 1px 40px 0 black;
+    border-radius: 3pc;
+    position: relative;
+    margin: auto;
+    height: 350px;
+    width: 675px;
+    height: 72vh;
+    
+}
+.formulario2{
+    text-align: center;
+    color: #231942;
+    padding: 25px 0px;
+    font-size: 20px;
+    height: 300px;
+    width: 300px;
+}
+
+.bloque2{
+    text-align: center;
+    color: #231942;
+    padding: 44px 0px;
+    font-size: 20px;
+    height: 300px;
+    width: 300px;
+}
+
+input{
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 5px;
+    border: transparent;
+}
+
+.boton2 {
+    position: relative;
+    top: 38px;
+}
+
+
+
