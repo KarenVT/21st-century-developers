@@ -13,12 +13,30 @@
 .titulo{
     text-align:center;
     font-weight: 20px;
+    margin-bottom: 20px;
 }
 
-.datos  {
+.datos, .datos2  {
     border-radius: 20px;
     font-size: 20px;
     padding: 5px;
     border: transparent;
-    margin: 10px;
+    margin: 10px auto;
+    float: left;
+}
+
+.datos2 {
+    position: relative;
+    left: 60px;
+}
+
+label {
+    float: left;
+    margin: 15px auto;
+    display: block;
+}
+
+.boton {
+    position: relative;
+    top: 20px;
 }

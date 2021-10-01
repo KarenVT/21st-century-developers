@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/GestionUsuariosRoles.css';
+import { Link } from "react-router-dom";
 
 
 export default class GestionUsuariosRoles extends Component {
@@ -17,23 +18,32 @@ export default class GestionUsuariosRoles extends Component {
                                 Gestión Usuarios y Roles
                             </h2>
                         </div>
-                        <label for="id">Id</label>
-                        <input className="datos" type="text" name="id" id="id"></input>
-                        <label className="datos" for="Usuario">Usuario</label>
-                        <input className="datos" type="text" name="Usuario" id="Usuario"></input>
-                        <label for="roles">Roles</label>
-                        <select className="datos" name="roles" id="roles">
-                            <option disabled="">Seleccionar rol</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Vendedor">Vendedor</option>
-                        </select>
-                        <label for="roles">Estado</label>
-                        <select className="datos" name="estado" id="estado">
-                            <option disabled="">Seleccionar Estado</option>
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="Autorizado">Autorizado</option>
-                            <option value="No-autorizado">No autorizado</option>
-                        </select>
+                        <div>
+                            <label className="datos"for="id">Id</label>
+                            <input className="datos" type="text" name="id" id="id"></input>
+                            <label className="datos" for="Usuario">Usuario</label>
+                            <input className="datos" type="text" name="Usuario" id="Usuario"></input>
+                        </div>
+                        <div>
+                            <label className="datos2" for="roles">Roles</label>
+                            <select className="datos2" name="roles" id="roles">
+                                <option disabled="">Seleccionar rol</option>
+                                <option value="Administrador">Administrador</option>
+                                <option value="Vendedor">Vendedor</option>
+                            </select>
+                            <label  className="datos2" for="roles">Estado</label>
+                            <select className="datos2" name="estado" id="estado">
+                                <option disabled="">Seleccionar Estado</option>
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Autorizado">Autorizado</option>
+                                <option value="No-autorizado">No autorizado</option>
+                            </select>
+                        </div>
+                        <div className="boton">
+                            <Link to="/">  {/* Modificar estado del usuario */}
+                                <button >Guardar</button>
+                            </Link>
+                        </div>
                     </div>
                 </section>
 
