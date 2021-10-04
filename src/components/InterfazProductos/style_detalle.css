@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display)swap');
 
 body{
-    background-image: url("https://us.123rf.com/450wm/gurza/gurza1902/gurza190200019/124846791-tienda-de-productos-org%C3%A1nicos-supermercado-ilustraci%C3%B3n-vectorial.jpg?ver=6");
+    background: url(../../assets/images/fondo.jpg) no-repeat center;
+    height: 80vh;
 }
 
 :root{
@@ -42,8 +43,9 @@ body{
     border-radius: var(--dt-border-radius);
     color: var(--dt-text-color);
     width: 600px;
-    margin: 0 auto;
     font-size: 12px;
+    margin: 95px auto;
+
 }
 
 .detalle-container .componentes-detalle{
