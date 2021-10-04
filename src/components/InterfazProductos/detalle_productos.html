@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width intitial-scan">
+    <title>Detalle productos</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style_detalle.css">
+</head>
+    <bod>
+<!--detalle maestro-->
+        <div class="detalle-container">
+<!--Componentes de la tabla- buscar, modificar, seleccionar y eliminar-->
+            <div class="componentes-detalle">
+                <div class="componentes">
+                    <ul>
+                        <li><span><input type="checkbox"></span></li>
+                        <li>
+                            <button>
+                                <i class="material-icons">add_circle</i>
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                <i class="material-icons">search</i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search">
+                    <input type="text" name="" id="" class="search-input">
+                </div>
+            </div>
+
+
+<!--Cuadro de busqueda-->
+            <table class="tabla_resumen">
+                <thead>
+                    <tr>
+                        <th></th>
+                       <th>Identificador</th> 
+                       <th>Descripción</th>
+                       <th>Valor unitario</th>
+                       <th>Estado</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td class="tabla-checkbox"><input type="checkbox" name=""></td>
+                        <td>1</td>
+                        <td>Tomate</td>
+                        <td>$500</td>
+                        <td><span class="disponible"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="tabla-checkbox"><input type="checkbox" name=""></td>
+                        <td>2</td>
+                        <td>Frijol</td>
+                        <td>$4.500</td>
+                        <td><span class="nodisponible"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="tabla-checkbox"><input type="checkbox" name=""></td>
+                        <td>3</td>
+                        <td>Cebolla</td>
+                        <td>$1.500</td>
+                        <td><span class="disponible"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="tabla-checkbox"><input type="checkbox" name=""></td>
+                        <td>4</td>
+                        <td>Cilantro</td>
+                        <td>$200</td>
+                        <td><span class="nodisponible"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="tabla-checkbox"><input type="checkbox" name=""></td>
+                        <td>5</td>
+                        <td>Curcuma</td>
+                        <td>$2.000</td>
+                        <td><span class="disponible"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+<!--Componentes finales de la tabla-->
+            <div class="final-componentes">
+                <div class="lista-items">
+                    mostrar
+                    <select name="n-entries" id="n-enties" class="n-entries">
+                        <option value="15">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="15">15</option>
+                    </select>
+                    entradas
+                </div>
+                <div class="paginas">
+                   <ul>
+                       <li><span class="active">1</span></li>
+                       <li><button>2</button></li>
+                       <li><button>3</button></li>
+                       <li><button>4</button></li>
+                       <li><span>...</span></li>
+                       <li><button>9</button></li>
+                       <li><button>10</button></li>
+                   </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+</html>
