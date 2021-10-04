@@ -26,10 +26,10 @@ body {
 ::placeholder {
     color: #231942;
 }
-footer {
+.pie-de-pagina {
     font-size: 20px;
-    color: #231942;
-    position: absolute;
+    color: #160e2e;
+    float: right;
     bottom: 0;
     right: 0;
 }
