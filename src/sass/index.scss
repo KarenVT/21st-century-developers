@@ -31,12 +31,10 @@ $color-6: #160e2e;
 h1 {
   font-size: 50px;
   color: $color-principal;
-  height: 15%;
 }
 body {
   background: url(../assets/images/fondo.jpg) no-repeat center fixed;
   background-size: cover;
-  height: 100%;
 }
 .container {
   text-align: center;
@@ -45,7 +43,7 @@ body {
   padding: 40px;
   font-size: $tamaño-principal;
   box-shadow: 1px 1px 40px 0 $color-principal;
-  height: 70%;
+
 
 }
 .titulo {
@@ -80,5 +78,5 @@ code {
 footer {
     font-size: $tamaño-principal;
     color: $color-6;
-    height: 15%;
+
 }
