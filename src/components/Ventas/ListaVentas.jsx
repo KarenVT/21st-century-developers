@@ -7,7 +7,7 @@ const ListaVentas = () => {
         <>
             <Header />
 
-            <div className="container col-lg-12 d-flex flex-column my-4">
+            <div className="container col-lg-12 d-flex flex-column">
                 <Titulo nombre="Ventas Realizadas" />
                 <table class="table table-borderless d-flex col-md-8 justify-content-center">
                     <thead>

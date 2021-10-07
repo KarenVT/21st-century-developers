@@ -8,7 +8,7 @@ const ListaProductos = () => {
         <>
             <Header />
 
-            <div className="container col-lg-12 d-flex flex-column my-4">
+            <div className="container col-lg-12 d-flex flex-column">
                 <Titulo nombre="Lista Productos" />
                 <table class="table table-borderless d-flex col-md-8 justify-content-center">
                     <tbody>
