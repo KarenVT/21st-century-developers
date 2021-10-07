@@ -1,0 +1,74 @@
+// ?<----------------------------------------------------------------->
+// ?                            Variables
+// ?<----------------------------------------------------------------->
+
+// *<------------------------------>
+// *     paletas de colores
+// *<------------------------------>
+
+$color-principal: #231942;
+$color-2: #5e548e;
+$color-3: #9f86c0;
+$color-4: #be95c4;
+$color-5: #e0b1cb;
+$color-6: #160e2e;
+
+$primary : $color-principal;
+
+  // *<------------------------------>
+  // *     Tamaños
+  // *<------------------------------>
+  
+  $tamaño-principal: 20px;
+  
+h1 {
+  font-size: 50px;
+  color: $color-principal;
+}
+body {
+  background: url(../assets/images/fondo.jpg) no-repeat center fixed;
+  background-size: cover; 
+}
+.container {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  color:  $color-principal;
+  padding: 40px;
+  font-size: $tamaño-principal;
+  box-shadow: 1px 1px 40px 0 $color-principal;
+
+}
+.titulo {
+  text-align:center;
+  font-weight: $tamaño-principal;
+  padding-bottom: $tamaño-principal;
+}
+/* ::placeholder {
+  color: #160e2e;
+} */
+
+button{
+  font-size: 1em;
+  background: $color-6;
+  color: white;
+  border: transparent;
+}
+
+button:hover{
+  background: $color-principal;
+  color: #fff;
+}
+
+button:active{
+  background: #9f86c0;
+  color: #fff;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+footer {
+    font-size: $tamaño-principal;
+    color: $color-6;
+}

@@ -1,26 +1,31 @@
 import React from 'react';
-import './App.css';
-import GestionUsuariosRoles from './components/InterfazRoles/GestionUsuariosRoles';
-import RegistroDeVentas from './components/InterfazVentas/RegistroDeVentas';
-import RegistroProductos from './components/InterfazProductos/RegistroProductos';
-import Ventas from './components/InterfazVentas/Ventas';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Acceso from './components/Acceso';
-
+import './sass/index.scss';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Login from './components/Login/Login'
+import RegistroVentas from './components/Ventas/RegistroVentas'
+import ListaVentas from './components/Ventas/ListaVentas'
+import RegistroProductos from './components/Productos/RegistroProductos'
+import ListaProductos from './components/Productos/ListaProductos'
+import Roles from './components/roles/GestionUsuarioRoles'
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
 
 function App() {
   return (
-    <div>
-      <Router>
-        <Route exact path="/" component={Acceso}/>
-        <Route exact path="/registroventas" component={RegistroDeVentas} />
-        <Route exact path="/registroproductos" component={RegistroProductos} />
-        <Route exact path="/ventas" component={Ventas} />
-        <Route exact path="/roles" component={GestionUsuariosRoles} />
-      </Router>
-    </div>
+    <>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Login}/>
+        <Route exact path="/RegistroVentas" component={RegistroVentas}/>
+        <Route exact path="/ListaVentas" component={ListaVentas}/>
+        <Route exact path="/RegistroProductos" component={RegistroProductos}/>
+        <Route exact path="/ListaProductos" component={ListaProductos}/>
+        <Route exact path="/Roles" component={Roles}/>
+      </Switch>
+    </Router>
+</>
   );
 }
 
