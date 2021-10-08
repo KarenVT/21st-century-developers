@@ -1,13 +1,9 @@
 import React from 'react'
-import Footer from '../Generales/Footer'
-import Header from '../Generales/Header'
 import Titulo from '../Generales/Titulo'
 const RegistroVentas = () => {
     return (
         <>
-            <Header/>
             <form className="container col-lg-12 d-flex position-absolute top-50 start-50 translate-middle my-4"  >
-               
                 <div className="row">
                 <Titulo nombre="Registros de Ventas"/>
                     <div className="form-group col-md-6">
@@ -51,9 +47,7 @@ const RegistroVentas = () => {
                 </div>
                 </div>
             </form>
-            <Footer/>
         </>
-        
     );
 }
 

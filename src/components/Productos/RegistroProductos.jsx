@@ -1,11 +1,8 @@
 import React from 'react'
-import Footer from '../Generales/Footer'
-import Header from '../Generales/Header'
 import Titulo from '../Generales/Titulo'
 const RegistroProductos = () => {
     return (
         <>
-            <Header />
             <form className="container col-lg-12 d-flex position-absolute top-50 start-50 translate-middle   my-4">
                 <div className="row justify-content-center">
                     <Titulo nombre="Registro Productos" />
@@ -37,7 +34,6 @@ const RegistroProductos = () => {
 
                 </div>
             </form>
-            <Footer />
         </>
     );
 }

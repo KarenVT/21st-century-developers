@@ -1,13 +1,9 @@
 import React from 'react'
-import Footer from '../Generales/Footer'
-import Header from '../Generales/Header'
 import Titulo from '../Generales/Titulo'
 
 const ListaProductos = () => {
     return (
         <>
-            <Header />
-
             <div className="container col-lg-12 d-flex flex-column">
                 <Titulo nombre="Lista Productos" />
                 <table class="table table-borderless d-flex col-md-8 justify-content-center">
@@ -82,7 +78,6 @@ const ListaProductos = () => {
                     </tbody>
                 </table>
             </div>
-            <Footer />
         </>
     );
 }

@@ -1,12 +1,9 @@
 import React from 'react'
-import Footer from '../Generales/Footer'
-import Header from '../Generales/Header'
 import Titulo from '../Generales/Titulo'
 
 const GestionUsuarioRoles = () => {
     return (
         <>
-            <Header />
             <form className="container col-lg-8 d-flex position-absolute top-50 start-50 translate-middle  my-4">
                 <div className="row justify-content-center">
                     <Titulo nombre="Gestión de Roles" />
@@ -38,14 +35,10 @@ const GestionUsuarioRoles = () => {
                         <div className="invalid-feedback">Seleccione una opción</div>
                     </div>
                     <div className=" d-flex justify-content-center ">
-
                         <button className="col-lg-3 rounded-pill m-2">Guardar</button>
-
                     </div>
                 </div>
-
             </form>
-            <Footer />
         </>
     );
 }
