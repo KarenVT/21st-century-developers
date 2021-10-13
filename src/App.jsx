@@ -1,4 +1,3 @@
-import './App.css';
 import './styles/styles.css';
 import Registro from './pages/Registro';
 import Login from './pages/Login';
