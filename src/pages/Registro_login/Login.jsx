@@ -7,17 +7,17 @@ const Login = () => {
             <form className="mt-8 max-w-md w-screen bg-white px-20 py-10 rounded-full">
             <h2 className="m-4 text-center text-3xl font-extrabold text-gray-900">INICIA SESIÓN EN TU CUENTA</h2>
                 <div>
-                    <p>Usuario</p>
-                    <input className="w-full appearance-none px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" type="email" placeholder="@c.com" required />
+                <label for="email">Usuario</label>
+                    <input className="input shadow-lg" type="email" placeholder="@c.com" required />
                 </div>
                 <div >
-                    <p>Contraseña</p>
-                    <input className="w-full appearance-none px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" type="password" required />
+                <label for="password">Contraseña</label>
+                    <input className="input shadow-lg" type="password" required />
                 </div>
 
                 <div className="flex justify-between py-2">
-                    <div className="">
-                        <label htmlFor=" recuérdame ">
+                    <div>
+                        <label htmlFor=" recuerdame ">
                             <input type="checkbox" name=" recuerdame " />
                             Recuérdame
                         </label>
@@ -29,21 +29,21 @@ const Login = () => {
                     </div>
                 </div>
                 <div className="flex justify-between">
-                    <div className="">
+                    <div className="w-2/5">
                         <Link to="/">
-                            <button className="bg-indigo-900 p-2 text-white rounded-full shadow-md hover:bg-indigo-700" type="submit">Iniciar sesión</button>
+                            <button className="boton" type="submit">Iniciar sesión</button>
                         </Link>
                     </div>
-                    <div className="">
+                    <div className="w-2/5">
                         <Link to="/Registro">
-                            <button className="bg-indigo-900 p-2  text-white rounded-full shadow-md hover:bg-indigo-700">Registrarse</button>
+                            <button className="boton">Registrarse</button>
                         </Link>
                     </div>
                 </div>
 
                 <div className="flex justify-center pt-4">
                     <div className="px-2">
-                        <button className="rounded-full h-10 px-2 w-full bg-indigo-900 text-white shadow-md hover:bg-indigo-700">Continua con Google</button>
+                        <button className="rounded-full h-10 p-2 focus:outline-none border-2 border-principal focus:text-white focus:bg-principal shadow-lg">Continua con <span className="text-red-800 focus:text-white">Google</span> </button>
                     </div>
                 </div>
             </form>

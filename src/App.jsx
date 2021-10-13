@@ -14,14 +14,23 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path={['/Admin', "/Admin/Ventas"]}>
+        <Route path={['/Admin', '/Admin/Ventas', '/Admin/RegistroVentas']}>
           <PrivateLayaut>
             <Switch>
-              <Route path='/admin/ventas'>
+              <Route path='/Admin/Ventas'>
                 <Ventas />
               </Route>
               <Route path='/Admin'>
                 <Admin />
+              </Route>
+            </Switch>
+          </PrivateLayaut>
+        </Route>
+        <Route path={['/RegistroVentas']}>
+          <PrivateLayaut>
+            <Switch>
+              <Route path="/RegistroVentas">
+                <RegistroVentas />
               </Route>
             </Switch>
           </PrivateLayaut>
