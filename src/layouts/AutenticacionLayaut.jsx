@@ -2,10 +2,12 @@ import React from 'react';
 
 const AutenticacionLayaut = ({ children }) => {
     return (
-        <div>
-            AutenticacionLayaut {children}
+        <div className="w-full text-center">
+        <div className="w-full">
+            {children}
         </div>
-    )
-}
+        </div>
+    );
+};
 
 export default AutenticacionLayaut;
