@@ -1,11 +1,9 @@
-
-import './App.css';
+import './styles/App.css';
+import RegistroVentas from './pages/Ventas/RegistroVentas';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Holaa</h1>
-    </div>
+      <RegistroVentas/>
   );
 }
 
