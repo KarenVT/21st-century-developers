@@ -8,6 +8,7 @@ import AutenticacionLayaut from './layouts/AutenticacionLayaut';
 import PrivateLayaut from './layouts/PrivateLayaut';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Ventas from './pages/Admin/Ventas/Ventas';
+import RegistroVentas from './pages/Admin/Ventas/RegistroVentas';
 
 function App() {
   return (
