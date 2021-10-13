@@ -31,19 +31,19 @@ const Login = () => {
                 <div className="flex justify-between">
                     <div className="">
                         <Link to="/">
-                            <button className="bg-indigo-500 p-2 text-white rounded-full shadow-md hover:bg-indigo-700" type="submit">Iniciar sesión</button>
+                            <button className="bg-indigo-900 p-2 text-white rounded-full shadow-md hover:bg-indigo-700" type="submit">Iniciar sesión</button>
                         </Link>
                     </div>
                     <div className="">
                         <Link to="/Registro">
-                            <button className="bg-indigo-500 p-2  text-white rounded-full shadow-md hover:bg-indigo-700">Registrarse</button>
+                            <button className="bg-indigo-900 p-2  text-white rounded-full shadow-md hover:bg-indigo-700">Registrarse</button>
                         </Link>
                     </div>
                 </div>
-                <br />
-                <div className="flex justify-center">
+
+                <div className="flex justify-center pt-4">
                     <div className="px-2">
-                        <button className=" bg-indigo-500 p-2 text-white rounded-full    shadow-md hover:bg-indigo-700">Continua con Google</button>
+                        <button className="rounded-full h-10 px-2 w-full bg-indigo-900 text-white shadow-md hover:bg-indigo-700">Continua con Google</button>
                     </div>
                 </div>
             </form>
