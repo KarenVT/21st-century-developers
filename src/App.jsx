@@ -3,7 +3,6 @@ import RegistroVentas from './pages/Ventas/RegistroVentas';
 
 function App() {
   return (
-      <RegistroVentas/>
   );
 }
 
