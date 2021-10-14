@@ -1,12 +1,14 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+// import Sidebar from "../components/Sidebar";
 import React from 'react';
-import Sidebar from "../components/Sidebar";
 
 const PrivateLayaut = ({ children }) => {
     return (
-        <div className="">
-        <main className="">{children}</main>
+        <div className="flex flex-col justify-between h-screen">
+        <Navbar/>
+            <main classname="h-full overflow-y-scroll">{children}</main>
+            <Footer/>
         </div>
     );
 };

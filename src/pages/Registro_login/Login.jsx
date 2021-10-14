@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
     return (
         <div className="h-screen flex flex-col w-full justify-center items-center bg-yellow-600">
-            <form className="mt-8 max-w-md w-screen bg-white px-20 py-10 rounded-full">
+            <form className="mt-8 max-w-md w-auto bg-white p-9 h-auto rounded-full">
             <h2 className="m-4 text-center text-3xl font-extrabold text-gray-900">INICIA SESIÓN EN TU CUENTA</h2>
                 <div>
                 <label for="email">Usuario</label>
@@ -15,7 +15,7 @@ const Login = () => {
                     <input className="input shadow-lg" type="password" required />
                 </div>
 
-                <div className="flex justify-between py-2">
+                <div className="flex justify-between p-2">
                     <div>
                         <label htmlFor=" recuerdame ">
                             <input type="checkbox" name=" recuerdame " />
@@ -28,15 +28,15 @@ const Login = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between px-5">
                     <div className="w-2/5">
                         <Link to="/">
-                            <button className="boton" type="submit">Iniciar sesión</button>
+                            <button className="boton w-full" type="submit">Iniciar sesión</button>
                         </Link>
                     </div>
                     <div className="w-2/5">
                         <Link to="/Registro">
-                            <button className="boton">Registrarse</button>
+                            <button className="boton w-full">Registrarse</button>
                         </Link>
                     </div>
                 </div>
