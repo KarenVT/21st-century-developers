@@ -9,12 +9,13 @@ import PrivateLayaut from './layouts/PrivateLayaut';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Ventas from './pages/Admin/Ventas/Ventas';
 import RegistroVentas from './pages/Admin/Ventas/RegistroVentas';
+import { RegistroProducto } from './pages/Admin/Productos/RegistroProductos';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path={['/Admin', '/Admin/Ventas', '/Admin/RegistroVentas']}>
+        <Route path={['/Admin', '/Admin/Ventas', '/Admin/RegistroVentas', '/Admin/RegistroProductos']}>
           <PrivateLayaut>
             <Switch>
               <Route path='/Admin/Ventas'>
@@ -26,6 +27,16 @@ function App() {
             </Switch>
           </PrivateLayaut>
         </Route>
+        <Route path={['/RegistroProductos']}>
+          <PrivateLayaut>
+            <Switch>
+              <Route path="/RegistroProductos">
+                <RegistroProducto />
+              </Route>
+            </Switch>
+          </PrivateLayaut>
+        </Route>
+
         <Route path={['/RegistroVentas']}>
           <PrivateLayaut>
             <Switch>
