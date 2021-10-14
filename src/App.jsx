@@ -8,13 +8,15 @@ import AutenticacionLayaut from './layouts/AutenticacionLayaut';
 import PrivateLayaut from './layouts/PrivateLayaut';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Ventas from './pages/Admin/Ventas/Ventas';
+import RegistroVentas from './pages/Admin/Ventas/RegistroVentas';
 import { RegistroProducto } from './pages/Admin/Productos/RegistroProductos';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path={['/Admin', '/Admin/Ventas']}>
+
+      <Route path={['/Admin', '/Admin/Ventas', '/Admin/RegistroVentas', '/Admin/RegistroProductos']}>
           <PrivateLayaut>
             <Switch>
               <Route path='/Admin/Ventas'>
@@ -22,6 +24,24 @@ function App() {
               </Route>
               <Route path='/Admin'>
                 <Admin />
+              </Route>
+            </Switch>
+          </PrivateLayaut>
+        </Route>
+        <Route path={['/RegistroProductos']}>
+          <PrivateLayaut>
+            <Switch>
+              <Route path="/RegistroProductos">
+                <RegistroProducto />
+              </Route>
+            </Switch>
+          </PrivateLayaut>
+        </Route>
+        <Route path={['/RegistroVentas']}>
+          <PrivateLayaut>
+            <Switch>
+              <Route path="/RegistroVentas">
+                <RegistroVentas />
               </Route>
             </Switch>
           </PrivateLayaut>
