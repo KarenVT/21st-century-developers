@@ -2,13 +2,13 @@ import './styles/styles.css';
 import Registro from './pages/Registro_login/Registro';
 import Login from './pages/Registro_login/Login';
 import Admin from './pages/Admin/IndexAdmin';
+import Adminusuario from './pages/Admin/AdminUsuarios/Adminusuario';
 import Index from './pages/Home/Index';
 import PublicLayout from './layouts/PublicLayout';
 import AutenticacionLayaut from './layouts/AutenticacionLayaut';
 import PrivateLayaut from './layouts/PrivateLayaut';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Ventas from './pages/Admin/Ventas/Ventas';
-import RegistroVentas from './pages/Admin/Ventas/RegistroVentas';
 import { RegistroProducto } from './pages/Admin/Productos/RegistroProductos';
 
 function App() {
@@ -16,9 +16,15 @@ function App() {
     <Router>
       <Switch>
 
-      <Route path={['/Admin', '/Admin/Ventas', '/Admin/RegistroVentas', '/Admin/RegistroProductos']}>
+        <Route path={['/Admin', '/Admin/Ventas', '/Admin/RegistroProductos','/Adminusuario']}>
           <PrivateLayaut>
             <Switch>
+              <Route path='/Admin/AdminUsuarios'>
+                <Adminusuario />
+              </Route>
+              <Route path='/Admin/RegistroProductos'>
+                <RegistroProducto />
+              </Route>
               <Route path='/Admin/Ventas'>
                 <Ventas />
               </Route>
@@ -28,24 +34,7 @@ function App() {
             </Switch>
           </PrivateLayaut>
         </Route>
-        <Route path={['/RegistroProductos']}>
-          <PrivateLayaut>
-            <Switch>
-              <Route path="/RegistroProductos">
-                <RegistroProducto />
-              </Route>
-            </Switch>
-          </PrivateLayaut>
-        </Route>
-        <Route path={['/RegistroVentas']}>
-          <PrivateLayaut>
-            <Switch>
-              <Route path="/RegistroVentas">
-                <RegistroVentas />
-              </Route>
-            </Switch>
-          </PrivateLayaut>
-        </Route>
+
 
         <Route path={['/Login', '/Registro']}>
           <AutenticacionLayaut>
