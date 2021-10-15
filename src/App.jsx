@@ -15,7 +15,6 @@ function App() {
   return (
     <Router>
       <Switch>
-
         <Route path={['/Admin', '/Admin/Ventas', '/Admin/RegistroProductos','/Adminusuario']}>
           <PrivateLayaut>
             <Switch>
@@ -34,8 +33,6 @@ function App() {
             </Switch>
           </PrivateLayaut>
         </Route>
-
-
         <Route path={['/Login', '/Registro']}>
           <AutenticacionLayaut>
             <Switch>
@@ -48,7 +45,6 @@ function App() {
             </Switch>
           </AutenticacionLayaut>
         </Route>
-
         <Route path={['/']}>
           <PublicLayout>
             <Switch>
