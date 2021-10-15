@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import '../../../styles/styles-form.css';
-import { v4 } from 'uuid'
-import http from 'axios'
+import { v4 } from 'uuid';
+import http from 'axios';
 
 export const RegistroProducto = () => {
     const { register, handleSubmit } = useForm();
