@@ -7,7 +7,7 @@ const PrivateLayaut = ({ children }) => {
     return (
         <div className="flex flex-col justify-between h-screen">
         <Navbar/>
-            <main classname="h-full overflow-y-scroll">{children}</main>
+            <main className="h-full overflow-y-scroll">{children}</main>
             <Footer/>
         </div>
     );

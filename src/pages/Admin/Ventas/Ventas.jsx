@@ -310,14 +310,15 @@ const Ventas = () => {
     //obtener/GET lista de ventas desde el backend
 
     const getVentas = async () => {
+      console.log(getVentas());
       const options = { method: 'GET', url: 'http://localhost:5000/ventas' };
 
       await axios
-        .request(options).then(function (response) {
-          console.log(response.data);
-        }).catch(function (error) {
-          console.error(error);
-        });
+      .request(options).then(function (response) {
+        console.log(response.data);
+      }).catch(function (error) {
+        console.error(error);
+      });
     }
     if (mostrarLista) {
       getVentas();
@@ -379,10 +380,10 @@ const RegisVentas = ({ setMostrarLista, listaventas, setVentas }) => {
       url: 'http://localhost:5000/ventas/nuevo',
       headers: { 'Content-Type': 'application/json' },
       data: {
-        id: nuevaVenta.nombreProducto,
+        id: nuevaVenta.id,
         fecha: nuevaVenta.fecha,
-        Identificador: nuevaVenta.id,
         idProducto: nuevaVenta.idProducto,
+        nombreProducto: nuevaVenta.nombreProducto,
         idCliente: nuevaVenta.idCliente,
         cantidadProducto: nuevaVenta.cantidadProducto,
         nombreCliente: nuevaVenta.nombreCliente,
@@ -408,7 +409,7 @@ const RegisVentas = ({ setMostrarLista, listaventas, setVentas }) => {
     <div className=" flex justify-center items-center">
       <form ref={form} onSubmit={submitForm} className=" bg-white px-6 py-3 shadow-2xl">
         <div>
-          <h2 class="text-3xl text-center pb-10 text-principal ">Registro de Ventas</h2>
+          <h2 className="text-3xl text-center pb-10 text-principal ">Registro de Ventas</h2>
         </div>
         <div className="flex space-x-4 mb-3">
           <div className="w-1/2">
@@ -422,7 +423,7 @@ const RegisVentas = ({ setMostrarLista, listaventas, setVentas }) => {
 
           </div>
           <div className="w-1/2">
-          <label className="pl-3" htmlFor="fecha">Fecha</label>
+            <label className="pl-3" htmlFor="fecha">Fecha</label>
             <input
               className="input"
               type="date"
@@ -433,7 +434,7 @@ const RegisVentas = ({ setMostrarLista, listaventas, setVentas }) => {
         </div>
         <div className="flex space-x-4 mb-3">
           <div className="w-1/2">
-          <label className="pl-3" htmlFor="idProducto">Id Producto</label>
+            <label className="pl-3" htmlFor="idProducto">Id Producto</label>
             <input
               className="input"
               type="number"
@@ -544,7 +545,12 @@ const ListVentas = ({ listaventas }) => {
       editarVenta[key] = value;
     });
 
-
+    const options = { method: 'PATCH', url: 'http://localhost:5000/ventas' };
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
 
   }
 
@@ -552,7 +558,7 @@ const ListVentas = ({ listaventas }) => {
     <>
       <div className="bg-white px-6 py-3 shadow-2xl">
         <div>
-          <h2 class="text-3xl text-center pb-10 text-principal ">Listado de Ventas</h2>
+          <h2 className="text-3xl text-center pb-10 text-principal ">Listado de Ventas</h2>
         </div>
         <form ref={formEditar} onSubmit={editarFila}>
           <table className="tabla">
@@ -588,7 +594,7 @@ const ListVentas = ({ listaventas }) => {
   )
 };
 
-const EditarVenta = ({ venta, }) => {
+const EditarVenta = ({ venta }) => {
 
   const [editar, setEditar] = useState(true);
   const [eliminar, setEliminar] = useState(true);
