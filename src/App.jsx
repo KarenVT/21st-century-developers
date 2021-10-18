@@ -2,8 +2,8 @@ import './styles/styles.css';
 import Registro from './pages/Registro_login/Registro';
 import Login from './pages/Registro_login/Login';
 import Admin from './pages/Admin/IndexAdmin';
-import Adminusuario from './pages/Admin/AdminUsuarios/Adminusuario';
 import Index from './pages/Home/Index';
+import IndexAdmin from './pages/Admin/IndexAdmin';
 import PublicLayout from './layouts/PublicLayout';
 import AutenticacionLayaut from './layouts/AutenticacionLayaut';
 import PrivateLayaut from './layouts/PrivateLayaut';
@@ -15,20 +15,22 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path={['/Admin', '/Admin/Ventas', '/Admin/RegistroProductos','/Adminusuario']}>
+        <Route path={['/Admin', '/Admin/Ventas', '/Admin/RegistroProductos', '/Admin/Ventas/IndexAdmin']}>
           <PrivateLayaut>
             <Switch>
-              <Route path='/Admin/AdminUsuarios'>
-                <Adminusuario />
+              <Route path="/Admin/Ventas/IndexAdmin">;
+              <IndexAdmin></IndexAdmin>
               </Route>
+
               <Route path='/Admin/RegistroProductos'>
-                <RegistroProducto />
+              <RegistroProducto />
               </Route>
+
               <Route path='/Admin/Ventas'>
-                <Ventas />
+              <Ventas />
               </Route>
               <Route path='/Admin'>
-                <Admin />
+              <Admin />
               </Route>
             </Switch>
           </PrivateLayaut>

@@ -18,3 +18,16 @@ body {
 .boton {
   @apply rounded-full h-10 px-2 bg-principal text-white shadow-lg;
 }
+
+.img {
+  background: url(/src/media/productos.png);
+  background-size: cover;
+  height: 200px;
+  width: 400px;
+}
+.img2 {
+  background: url(/src/media/ventas.jpg);
+  background-size: cover;
+  height: 200px;
+  width: 400px;
+}

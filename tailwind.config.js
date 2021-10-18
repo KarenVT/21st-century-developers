@@ -11,7 +11,7 @@ module.exports = {
         'paleta4': '#be95c4',
         'paleta5': '#e0b1cb',
         'paleta6': '#160e2e',
-      }
+      },
     }
   },
 variants: {
