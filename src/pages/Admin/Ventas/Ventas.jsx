@@ -609,14 +609,16 @@ const EditarVenta = ({ venta }) => {
       {
         editar ? (
           <>
-            <td><input type="text" className='input' defaultValue={venta.id} /></td>
-            <td><input type="text" className='input' defaultValue={venta.fecha} /></td>
-            <td><input type="text" className='input' defaultValue={venta.nombreProducto} /></td>
-            <td><input type="text" className='input' defaultValue={venta.idCliente} /></td>
-            <td><input type="text" className='input' defaultValue={venta.nombreCliente} /></td>
-            <td><input type="text" className='input' defaultValue={venta.cantidadProducto} /></td>
+            <td><input type="text" className='input' defaultValue={venta.id}/></td>
+            <td><input type="text" className='input' defaultValue={venta.fecha}/></td>
+            <td><input type="text" className='input' defaultValue={venta.idProducto}/></td>
+            <td><input type="text" className='input' defaultValue={venta.nombreProducto}/></td>
+            <td><input type="text" className='input' defaultValue={venta.idCliente}/></td>
+            <td><input type="text" className='input' defaultValue={venta.cantidadProducto}/></td>
+            <td><input type="text" className='input' defaultValue={venta.nombreCliente}/></td>
             <td><input type="text" className='input' defaultValue={venta.precioUnitario} /></td>
-            <td><input type="text" className='input' defaultValue={venta.totalVenta} /></td>
+            <td><input type="text" className='input' defaultValue={venta.nombreVendedor}/></td>
+            <td><input type="text" className='input' defaultValue={venta.totalVenta}/></td>
           </>
         ) : (
           <>
