@@ -310,20 +310,24 @@ const Ventas = () => {
     //obtener/GET lista de ventas desde el backend
 
     const getVentas = async () => {
-      console.log(getVentas());
+      // const getVentas = async () => {
+
       const options = { method: 'GET', url: 'http://localhost:5000/ventas' };
 
-      await axios
-      .request(options).then(function (response) {
+      axios.request(options).then(function (response) {
         console.log(response.data);
+        setVentas(response.data);
       }).catch(function (error) {
         console.error(error);
       });
     }
+    
     if (mostrarLista) {
       getVentas();
     }
+
   }, [mostrarLista]);
+  console.log("mostar:", mostrarLista, ventas);
 
   useEffect(() => {
     return () => {
@@ -596,7 +600,7 @@ const ListVentas = ({ listaventas }) => {
 
 const EditarVenta = ({ venta }) => {
 
-  const [editar, setEditar] = useState(true);
+  const [editar, setEditar] = useState(false);
   const [eliminar, setEliminar] = useState(true);
 
   return (
@@ -644,11 +648,11 @@ const EditarVenta = ({ venta }) => {
             ) : (
               <i
                 onClick={() => { setEditar(!editar) }}
-                className="fas fa-trash" />
+                className="fas fa-edit" />
             )
           }
 
-          <i onClick={() => { setEliminar(!eliminar) }} className="fas fa-edit" />
+          <i onClick={() => { setEliminar(!eliminar) }} className="fas fa-trash" />
         </div>
       </td>
     </tr>
