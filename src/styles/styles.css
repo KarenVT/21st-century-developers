@@ -18,6 +18,27 @@ body {
 .boton {
   @apply rounded-full h-10 px-2 bg-principal text-white shadow-lg;
 }
+  
+.tabla th,
+.tabla td {
+  padding: 15px;
+  margin: 5px;
+}
+
+.tabla th {
+  background-color:violet;
+  text-align: center;
+}
+
+.tabla tr:nth-child(even) {
+  background-color: #e0b1cb;
+}
+
+.tabla tr:hover {
+  background-color: #e0b1cb;
+  cursor: pointer;
+
+}
 
 .img {
   background: url(/src/media/productos.png);
