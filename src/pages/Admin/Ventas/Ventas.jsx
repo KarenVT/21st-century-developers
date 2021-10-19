@@ -321,13 +321,13 @@ const Ventas = () => {
         console.error(error);
       });
     }
-    
+
     if (mostrarLista) {
       getVentas();
     }
 
   }, [mostrarLista]);
-  console.log("mostar:", mostrarLista, ventas);
+  console.log("mostrar:", mostrarLista, ventas);
 
   useEffect(() => {
     return () => {
@@ -367,7 +367,7 @@ const Ventas = () => {
   );
 };
 
-const RegisVentas = ({ setMostrarLista, listaventas, setVentas }) => {
+const RegisVentas = ({ setMostrarLista, listaventas, ventas }) => {
   const form = useRef(null);
 
   const submitForm = async (e) => {
@@ -532,39 +532,58 @@ const RegisVentas = ({ setMostrarLista, listaventas, setVentas }) => {
 
 const ListVentas = ({ listaventas }) => {
 
-  const formEditar = useRef(null);
+  const form = useRef(null);
 
 
   useEffect(() => {
     console.log('este es el listado de ventas en el componente de tabla', listaventas);
   }, [listaventas]);
 
-  const editarFila = (e) => {
+  const editarFila = async (e) => {
     e.preventDefault();
     console.log(e);
-    const fe = new FormData(formEditar.current);
+    const fe = new FormData(form.current);
 
     const editarVenta = {};
     fe.forEach((value, key) => {
       editarVenta[key] = value;
     });
 
-    const options = { method: 'PATCH', url: 'http://localhost:5000/ventas' };
-    axios.request(options).then(function (response) {
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
+    const options = {
+      method: 'PATCH',
+      url: 'http://localhost:5000/ventas/editar',
+      headers: { 'Content-Type': 'application/json' },
+      data: {
+        id: editarVenta._id,
+        fecha: editarVenta.fecha,
+        idProducto: editarVenta.idProducto,
+        nombreProducto: editarVenta.nombreProducto,
+        idCliente: editarVenta.idCliente,
+        cantidadProducto: editarVenta.cantidadProducto,
+        nombreCliente: editarVenta.nombreCliente,
+        precioUnitario: editarVenta.precioUnitario,
+        nombreVendedor: editarVenta.nombreVendedor,
+        totalVenta: editarVenta.totalVenta
+      }
+    };
 
-  }
-
+    await axios
+      .request(options).then(function (response) {
+        console.log(response.data);
+        toast.success('venta editada con éxito');
+      }).catch(function (error) {
+        console.error(error);
+        toast.error('Error al registrar una Venta');
+      });
+    console.log('ventas:', editarVenta);
+  };
   return (
     <>
       <div className="bg-white px-6 py-3 shadow-2xl">
         <div>
           <h2 className="text-3xl text-center pb-10 text-principal ">Listado de Ventas</h2>
         </div>
-        <form ref={formEditar} onSubmit={editarFila}>
+        <form ref={form} onSubmit={editarFila}>
           <table className="tabla">
 
             <thead>
@@ -584,9 +603,9 @@ const ListVentas = ({ listaventas }) => {
             </thead>
             <tbody>
               {
-                listaventas.map((venta) => {
+                listaventas.map((ventas) => {
                   return (
-                    <EditarVenta key={nanoid()} venta={venta} />
+                    <EditarVenta key={nanoid()} ventas={ventas} />
                   )
                 })
               }
@@ -598,7 +617,7 @@ const ListVentas = ({ listaventas }) => {
   )
 };
 
-const EditarVenta = ({ venta }) => {
+const EditarVenta = ({ ventas }) => {
 
   const [editar, setEditar] = useState(false);
   const [eliminar, setEliminar] = useState(true);
@@ -609,29 +628,29 @@ const EditarVenta = ({ venta }) => {
       {
         editar ? (
           <>
-            <td><input type="text" className='input' defaultValue={venta.id}/></td>
-            <td><input type="text" className='input' defaultValue={venta.fecha}/></td>
-            <td><input type="text" className='input' defaultValue={venta.idProducto}/></td>
-            <td><input type="text" className='input' defaultValue={venta.nombreProducto}/></td>
-            <td><input type="text" className='input' defaultValue={venta.idCliente}/></td>
-            <td><input type="text" className='input' defaultValue={venta.cantidadProducto}/></td>
-            <td><input type="text" className='input' defaultValue={venta.nombreCliente}/></td>
-            <td><input type="text" className='input' defaultValue={venta.precioUnitario} /></td>
-            <td><input type="text" className='input' defaultValue={venta.nombreVendedor}/></td>
-            <td><input type="text" className='input' defaultValue={venta.totalVenta}/></td>
+            <td><input name='id' type="number" className='input' defaultValue={ventas.id} /></td>
+            <td><input name='fecha' type="date" className='input' defaultValue={ventas.fecha} /></td>
+            <td><input name='idProducto' type="number" className='input' defaultValue={ventas.idProducto} /></td>
+            <td><input name='nombreProducto' type="text" className='input' defaultValue={ventas.nombreProducto} /></td>
+            <td><input name='idCliente' type="number" className='input' defaultValue={ventas.idCliente} /></td>
+            <td><input name='cantidadProdcuto' type="number" className='input' defaultValue={ventas.cantidadProducto} /></td>
+            <td><input name='nombreCliente' type="text" className='input' defaultValue={ventas.nombreCliente} /></td>
+            <td><input name='precioUnitario' type="number" className='input' defaultValue={ventas.precioUnitario} /></td>
+            <td><input name='nombreVendedor' type="text" className='input' defaultValue={ventas.nombreVendedor} /></td>
+            <td><input name='totalVenta' type="number" className='input' defaultValue={ventas.totalVenta} /></td>
           </>
         ) : (
           <>
-            <th>{venta.id}</th>
-            <td>{venta.fecha}</td>
-            <td>{venta.idProducto}</td>
-            <td>{venta.nombreProducto}</td>
-            <td>{venta.idCliente}</td>
-            <td>{venta.nombreCliente}</td>
-            <td>{venta.cantidadProducto}</td>
-            <td>{venta.precioUnitario}</td>
-            <td>{venta.nombreVendedor}</td>
-            <td>{venta.totalVenta}</td>
+            <th>{ventas.id}</th>
+            <td>{ventas.fecha}</td>
+            <td>{ventas.idProducto}</td>
+            <td>{ventas.nombreProducto}</td>
+            <td>{ventas.idCliente}</td>
+            <td>{ventas.nombreCliente}</td>
+            <td>{ventas.cantidadProducto}</td>
+            <td>{ventas.precioUnitario}</td>
+            <td>{ventas.nombreVendedor}</td>
+            <td>{ventas.totalVenta}</td>
           </>
         )
       }
