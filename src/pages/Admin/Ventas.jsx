@@ -304,7 +304,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Ventas = () => {
   const [mostrarLista, setMostrarLista] = useState(true);
   const [ventas, setVentas] = useState([]);
-  const [cambioBoton, setCambioBoton] = useState('Crear Nuevo Vehículo');
+  const [cambioBoton, setCambioBoton] = useState('Crear Nueva Venta');
 
   useEffect(() => {
     //obtener/GET lista de ventas desde el backend
