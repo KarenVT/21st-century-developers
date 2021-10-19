@@ -1,14 +1,14 @@
 import './styles/styles.css';
 import Registro from './pages/Registro_login/Registro';
 import Login from './pages/Registro_login/Login';
-import Admin from './pages/IndexAdmin';
+import Admin from './pages/Admin/IndexAdmin';
 import Index from './pages/Home/Index';
-import IndexAdmin from './pages/IndexAdmin';
+import IndexAdmin from './pages/Admin/IndexAdmin';
 import PublicLayout from './layouts/PublicLayout';
 import AutenticacionLayaut from './layouts/AutenticacionLayaut';
 import PrivateLayaut from './layouts/PrivateLayaut';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Ventas from './pages/Admin/Ventas';
+import Ventas from './pages/Admin/Ventas/Ventas';
 import { RegistroProducto } from './pages/Admin/Productos/RegistroProductos';
 
 function App() {

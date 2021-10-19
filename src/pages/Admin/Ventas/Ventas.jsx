@@ -8,11 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const Ventas = () => {
   const [mostrarLista, setMostrarLista] = useState(true);
   const [ventas, setVentas] = useState([]);
-  const [cambioBoton, setCambioBoton] = useState('Crear Nueva Venta');
+  const [cambioBoton, setCambioBoton] = useState('Crear Nuevo Vehículo');
   const [ActualizarDatos, setActualizarDatos] = useState(true);
-
-
-
 
   useEffect(() => {
     const getVentas = async () => {
@@ -82,7 +79,7 @@ const Ventas = () => {
   );
 };
 
-const RegisVentas = ({ setMostrarLista, setActualizarDatos }) => {
+const RegisVentas = ({ setMostrarLista, setActualizarDatos  }) => {
   const form = useRef(null);
 
   const submitForm = async (e) => {
@@ -313,7 +310,7 @@ const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
               {
                 listaventas.map((ventas) => {
                   return (
-                    <EditarVenta key={nanoid()} ventas={ventas} setActualizarDatos={setActualizarDatos} />
+                    <EditarVenta key={nanoid()} ventas={ventas}  setActualizarDatos={setActualizarDatos} />
                   )
                 })
               }
@@ -328,24 +325,24 @@ const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
 const EditarVenta = ({ ventas, editarFila, setActualizarDatos }) => {
 
   const [editar, setEditar] = useState(false);
-
+  
 
   const eliminarVenta = async () => {
-
+    
     const options = {
       method: 'DELETE',
       url: 'http://localhost:5000/ventas/eliminar',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       data: { id: ventas._id }
     };
 
     await axios
-      .request(options).then(function (response) {
-        console.log(response.data);
-        setActualizarDatos(true);
-      }).catch(function (error) {
-        console.error(error);
-      });
+    .request(options).then(function (response) {
+      console.log(response.data);
+      setActualizarDatos(true);
+    }).catch(function (error) {
+      console.error(error);
+    });
   }
   return (
     <tr>
