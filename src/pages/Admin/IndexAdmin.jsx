@@ -5,7 +5,7 @@ const Admin = () => {
     return (
         <div className="flex justify-around">
             <div className="img  flex flex-col ">
-                <Link to=" ">
+                <Link to="./pages/IndexAdmin">
                     <button className="text-white  text-4xl  bg-indigo-500 p-2 rounded-lg  hover:bg-indigo-700">Master productos</button>
                 </Link>
             </div>
