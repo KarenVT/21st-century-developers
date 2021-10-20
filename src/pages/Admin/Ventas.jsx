@@ -115,11 +115,11 @@ const RegisVentas = ({ setMostrarLista, setActualizarDatos }) => {
     await axios
       .request(options).then(function (response) {
         console.log(response.data);
-        toast.success('venta registrada con éxito');
+        // toast.success('venta registrada con éxito');
         setActualizarDatos(true);
       }).catch(function (error) {
         console.error(error);
-        toast.error('Error al registrar una Venta');
+        // toast.error('Error al registrar una Venta');
       });
 
     setMostrarLista(true);
@@ -277,11 +277,11 @@ const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
     await axios
       .request(options).then(function (response) {
         console.log(response.data);
-        toast.success('venta editada con éxito');
+        // toast.success('venta editada con éxito');
         setEditar(false)
       }).catch(function (error) {
         console.error(error);
-        toast.error('Error al registrar una Venta');
+        // toast.error('Error al registrar una Venta');
       });
     console.log('ventas:', editarVenta);
   };
@@ -387,7 +387,7 @@ const EditarVenta = ({ ventas, editarFila, setActualizarDatos }) => {
 
               <button type='submit'>
                 <i
-                  onClick={() => { editarFila() }}
+                  onClick={() => {setEditar() }}
                   className="fas fa-check-square"></i>
               </button>
 
