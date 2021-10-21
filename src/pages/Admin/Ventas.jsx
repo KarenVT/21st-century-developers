@@ -104,10 +104,13 @@ const RegisVentas = ({ setMostrarLista, listaventas, ventas }) => {
     await axios
       .request(options).then(function (response) {
         console.log(response.data);
+
         toast.success('venta registrada con éxito');
+        // toast.success('venta registrada con éxito');
+
       }).catch(function (error) {
         console.error(error);
-        toast.error('Error al registrar una Venta');
+        // toast.error('Error al registrar una Venta');
       });
 
     setMostrarLista(true);
@@ -383,7 +386,9 @@ await axios
 
               <button type='submit'>
                 <i
+
                   onClick={() => { setEditar(!editar) }}
+
                   className="fas fa-check-square"></i>
               </button>
 
