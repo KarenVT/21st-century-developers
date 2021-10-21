@@ -1,13 +1,11 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
         <div className="grid justify-center text-xl text-paleta6 bg-paleta5 bg-opacity-40">
             <footer>
-                21st Century Developers    
+                21st Century Developers
             </footer>
-            
         </div>
     )
 }

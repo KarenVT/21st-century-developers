@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
     return (
-        <div className="h-screen flex flex-col w-full justify-center items-center bg-yellow-600">
-            <form className="mt-8 max-w-md w-auto bg-white p-9 h-auto rounded-full">
-            <h2 className="m-4 text-center text-3xl font-extrabold text-gray-900">INICIA SESIÓN EN TU CUENTA</h2>
+        <div className="h-screen flex flex-col w-full justify-center items-center">
+            <form className="mt-8 max-w-md w-auto bg-white p-9  h-auto rounded-full">
+            <h2 className="m-4 text-center text-3xl text-principal px-12">INICIA SESIÓN </h2>
                 <div>
                 <label for="email">Usuario</label>
                     <input className="input shadow-lg" type="email" placeholder="@c.com" required />

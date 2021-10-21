@@ -53,7 +53,7 @@ const Ventas = () => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-start p-10">
       <div className="flex flex-col items-center">
-        <h1 className="bg-paleta5 bg-opacity-50 text-4xl m-5 p-5 text-paleta6">
+        <h1 className="bg-paleta5 bg-opacity-50 text-4xl m-5 p-5 text-paleta6 ">
           Área de Administación de Ventas
         </h1>
         {mostrarLista ? (
@@ -112,11 +112,11 @@ const RegisVentas = ({ setMostrarLista, setActualizarDatos  }) => {
     await axios
       .request(options).then(function (response) {
         console.log(response.data);
-        toast.success('venta registrada con éxito');
+        // toast.success('venta registrada con éxito');
         setActualizarDatos(true);
       }).catch(function (error) {
         console.error(error);
-        toast.error('Error al registrar una Venta');
+        // toast.error('Error al registrar una Venta');
       });
 
     setMostrarLista(true);
@@ -243,45 +243,16 @@ const RegisVentas = ({ setMostrarLista, setActualizarDatos  }) => {
   )
 };
 
-const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
+const ListVentas = ({ listaventas, form, setActualizarDatos, editarFila }) => {
 
-  const form = useRef(null);
+  
 
 
   useEffect(() => {
-    console.log('este es el listado de ventas en el componente de tabla', listaventas);
+    console.log('lista de Ventas', listaventas);
   }, [listaventas]);
 
-  const editarFila = async (e) => {
-    e.preventDefault();
-    console.log(e);
-    const fe = new FormData(form.current);
-
-    const editarVenta = {};
-    fe.forEach((value, key) => {
-      editarVenta[key] = value;
-    });
-
-    const options = {
-      method: 'PATCH',
-      url: 'http://localhost:5000/ventas/editar',
-      headers: { 'Content-Type': 'application/json' },
-      data: {
-        id: editarVenta._id,
-      }
-    };
-
-    await axios
-      .request(options).then(function (response) {
-        console.log(response.data);
-        toast.success('venta editada con éxito');
-        setEditar(false)
-      }).catch(function (error) {
-        console.error(error);
-        toast.error('Error al registrar una Venta');
-      });
-    console.log('ventas:', editarVenta);
-  };
+ 
   return (
     <>
       <div className="bg-white px-6 py-3 shadow-2xl">
@@ -322,10 +293,40 @@ const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
   )
 };
 
-const EditarVenta = ({ ventas, editarFila, setActualizarDatos }) => {
-
+const EditarVenta = ({ ventas, setActualizarDatos }) => {
+  const form = useRef(null);
   const [editar, setEditar] = useState(false);
   
+  const editarFila = async (e) => {
+    e.preventDefault();
+    console.log(e);
+    const fe = new FormData(form.current);
+
+    const editarVenta = {};
+    fe.forEach((value, key) => {
+      editarVenta[key] = value;
+    });
+
+    const options = {
+      method: 'PATCH',
+      url: 'http://localhost:5000/ventas/editar',
+      headers: { 'Content-Type': 'application/json' },
+      data: {
+        id: editarVenta._id,
+      }
+    };
+
+    await axios
+      .request(options).then(function (response) {
+        console.log(response.data);
+        // toast.success('venta editada con éxito');
+        setEditar(false)
+      }).catch(function (error) {
+        console.error(error);
+        // toast.error('Error al editar una Venta');
+      });
+    console.log('ventas:', editarVenta);
+  };
 
   const eliminarVenta = async () => {
     
