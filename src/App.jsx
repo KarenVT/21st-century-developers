@@ -3,7 +3,6 @@ import Registro from './pages/Registro_login/Registro';
 import Login from './pages/Registro_login/Login';
 import Admin from './pages/Admin/IndexAdmin';
 import Index from './pages/Home/Index';
-import IndexAdmin from './pages/Admin/IndexAdmin';
 import PublicLayout from './layouts/PublicLayout';
 import AutenticacionLayaut from './layouts/AutenticacionLayaut';
 import PrivateLayaut from './layouts/PrivateLayaut';
@@ -19,7 +18,7 @@ function App() {
           <PrivateLayaut>
             <Switch>
               <Route path="/Admin/Ventas/IndexAdmin">;
-              <IndexAdmin></IndexAdmin>
+                <Admin/>
               </Route>
 
               <Route path='/Admin/RegistroProductos'>

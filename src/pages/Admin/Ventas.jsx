@@ -8,13 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 const Ventas = () => {
   const [mostrarLista, setMostrarLista] = useState(true);
   const [ventas, setVentas] = useState([]);
-  const [cambioBoton, setCambioBoton] = useState('Crear Nueva Venta');
-  const [ActualizarDatos, setActualizarDatos] = useState(true);
-
-
-
+  const [cambioBoton, setCambioBoton] = useState('Crear Nuevo Vehículo');
 
   useEffect(() => {
+    //obtener/GET lista de ventas desde el backend
+
     const getVentas = async () => {
       // const getVentas = async () => {
 
@@ -27,18 +25,9 @@ const Ventas = () => {
         console.error(error);
       });
     }
-    if (ActualizarDatos) {
-      getVentas();
-      setActualizarDatos(false);
-    }
-
-  }, [ActualizarDatos])
-
-  useEffect(() => {
-    //obtener/GET lista de ventas desde el backend
 
     if (mostrarLista) {
-      setActualizarDatos(true);
+      getVentas();
     }
 
   }, [mostrarLista]);
@@ -60,7 +49,7 @@ const Ventas = () => {
           Área de Administación de Ventas
         </h1>
         {mostrarLista ? (
-          <ListVentas listaventas={ventas} setActualizarDatos={setActualizarDatos} />
+          <ListVentas listaventas={ventas} />
         ) : (
           <RegisVentas
             setMostrarLista={setMostrarLista}
@@ -82,7 +71,7 @@ const Ventas = () => {
   );
 };
 
-const RegisVentas = ({ setMostrarLista, setActualizarDatos }) => {
+const RegisVentas = ({ setMostrarLista, listaventas, ventas }) => {
   const form = useRef(null);
 
   const submitForm = async (e) => {
@@ -116,7 +105,6 @@ const RegisVentas = ({ setMostrarLista, setActualizarDatos }) => {
       .request(options).then(function (response) {
         console.log(response.data);
         toast.success('venta registrada con éxito');
-        setActualizarDatos(true);
       }).catch(function (error) {
         console.error(error);
         toast.error('Error al registrar una Venta');
@@ -246,7 +234,7 @@ const RegisVentas = ({ setMostrarLista, setActualizarDatos }) => {
   )
 };
 
-const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
+const ListVentas = ({ listaventas }) => {
 
   const form = useRef(null);
 
@@ -264,24 +252,32 @@ const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
     fe.forEach((value, key) => {
       editarVenta[key] = value;
     });
-
+    console.log('venta actualizada:', editarVenta);
     const options = {
       method: 'PATCH',
       url: 'http://localhost:5000/ventas/editar',
       headers: { 'Content-Type': 'application/json' },
       data: {
         id: editarVenta._id,
+        fecha: editarVenta.fecha,
+        idProducto: editarVenta.idProducto,
+        nombreProducto: editarVenta.nombreProducto,
+        idCliente: editarVenta.idCliente,
+        cantidadProducto: editarVenta.cantidadProducto,
+        nombreCliente: editarVenta.nombreCliente,
+        precioUnitario: editarVenta.precioUnitario,
+        nombreVendedor: editarVenta.nombreVendedor,
+        totalVenta: editarVenta.totalVenta
       }
     };
 
     await axios
       .request(options).then(function (response) {
         console.log(response.data);
-        toast.success('venta editada con éxito');
-        setEditar(false)
+        // toast.success('venta editada con éxito');
       }).catch(function (error) {
         console.error(error);
-        toast.error('Error al registrar una Venta');
+        // toast.error('Error al registrar una Venta');
       });
     console.log('ventas:', editarVenta);
   };
@@ -313,7 +309,7 @@ const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
               {
                 listaventas.map((ventas) => {
                   return (
-                    <EditarVenta key={nanoid()} ventas={ventas} setActualizarDatos={setActualizarDatos} />
+                    <EditarVenta key={nanoid()} ventas={ventas} />
                   )
                 })
               }
@@ -325,28 +321,28 @@ const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
   )
 };
 
-const EditarVenta = ({ ventas, editarFila, setActualizarDatos }) => {
+const EditarVenta = ({ ventas }) => {
 
   const [editar, setEditar] = useState(false);
 
 
   const eliminarVenta = async () => {
 
-    const options = {
-      method: 'DELETE',
-      url: 'http://localhost:5000/ventas/eliminar',
-      headers: { 'Content-Type': 'application/json' },
-      data: { id: ventas._id }
-    };
+const options = {
+  method: 'DELETE',
+  url: 'http://localhost:5000/ventas/eliminar',
+  headers: { 'Content-Type': 'application/json' },
+  data: { id: ventas._id }
+};
 
-    await axios
-      .request(options).then(function (response) {
-        console.log(response.data);
-        setActualizarDatos(true);
-      }).catch(function (error) {
-        console.error(error);
-      });
-  }
+await axios
+  .request(options).then(function (response) {
+    console.log(response.data);
+  }).catch(function (error) {
+    console.error(error);
+  });
+}
+
   return (
     <tr>
 
@@ -387,7 +383,7 @@ const EditarVenta = ({ ventas, editarFila, setActualizarDatos }) => {
 
               <button type='submit'>
                 <i
-                  onClick={() => { editarFila() }}
+                  onClick={() => { setEditar(!editar) }}
                   className="fas fa-check-square"></i>
               </button>
 
