@@ -119,7 +119,7 @@ const RegisVentas = ({ setMostrarLista, setActualizarDatos }) => {
         console.error(error);
         // toast.error('Error al registrar una Venta');
       });
-      setMostrarLista(true)
+    setMostrarLista(true)
   };
 
   return (
@@ -382,8 +382,8 @@ const EditarVenta = ({ ventas, editarFila, setActualizarDatos }) => {
             <td><input name='idProducto' type="number" className='input' defaultValue={ventas.idProducto} /></td>
             <td><input name='nombreProducto' type="text" className='input' defaultValue={ventas.nombreProducto} /></td>
             <td><input name='idCliente' type="number" className='input' defaultValue={ventas.idCliente} /></td>
-            <td><input name='cantidadProdcuto' type="number" className='input' defaultValue={ventas.cantidadProducto} /></td>
             <td><input name='nombreCliente' type="text" className='input' defaultValue={ventas.nombreCliente} /></td>
+            <td><input name='cantidadProducto' type="number" className='input' defaultValue={ventas.cantidadProducto} /></td>
             <td><input name='precioUnitario' type="number" className='input' defaultValue={ventas.precioUnitario} /></td>
             <td><input name='nombreVendedor' type="text" className='input' defaultValue={ventas.nombreVendedor} /></td>
             <td><input name='totalVenta' type="number" className='input' defaultValue={ventas.totalVenta} /></td>
