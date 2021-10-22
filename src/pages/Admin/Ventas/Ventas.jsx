@@ -1,34 +1,35 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { nanoid } from 'nanoid';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 
 const Ventas = () => {
   const [mostrarLista, setMostrarLista] = useState(true);
   const [ventas, setVentas] = useState([]);
-  const [cambioBoton, setCambioBoton] = useState('Crear Nuevo Vehículo');
+  const [cambioBoton, setCambioBoton] = useState('Crear Nueva Venta');
   const [ActualizarDatos, setActualizarDatos] = useState(true);
+
+
 
   useEffect(() => {
     const getVentas = async () => {
-      // const getVentas = async () => {
 
       const options = { method: 'GET', url: 'http://localhost:5000/ventas' };
 
-      axios.request(options).then(function (response) {
-        console.log(response.data);
-        setVentas(response.data);
-      }).catch(function (error) {
-        console.error(error);
-      });
-    }
+      await axios
+        .request(options).then(function (response) {
+          console.log(response.data);
+          setVentas(response.data);
+        }).catch(function (error) {
+          console.error(error);
+        });
+      setActualizarDatos(false);
+    };
     if (ActualizarDatos) {
       getVentas();
-      setActualizarDatos(false);
     }
-
   }, [ActualizarDatos])
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const Ventas = () => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-start p-10">
       <div className="flex flex-col items-center">
-        <h1 className="bg-paleta5 bg-opacity-50 text-4xl m-5 p-5 text-paleta6 ">
+        <h1 className="bg-paleta5 bg-opacity-50 text-4xl m-5 p-5 text-paleta6">
           Área de Administación de Ventas
         </h1>
         {mostrarLista ? (
@@ -65,13 +66,13 @@ const Ventas = () => {
             setVentas={setVentas}
           />
         )}
-        <ToastContainer position='bottom-center' autoClose={5000} />
+        {/* <ToastContainer position='bottom-center' autoClose={5000} /> */}
       </div>
       <button
         onClick={() => {
           setMostrarLista(!mostrarLista)
         }}
-        className=" rounded-full h-10 w-2/6 mt-5 bg-paleta2 bg-opacity-80 text-paleta6 shadow-lg"
+        className=" rounded-full  h-10 w-60 mt-4 bg-paleta2 bg-opacity-80 text-paleta6 shadow-lx"
       >
         {cambioBoton}
       </button>
@@ -79,13 +80,13 @@ const Ventas = () => {
   );
 };
 
-const RegisVentas = ({ setMostrarLista, setActualizarDatos  }) => {
+const RegisVentas = ({ setMostrarLista, setActualizarDatos }) => {
   const form = useRef(null);
 
   const submitForm = async (e) => {
     e.preventDefault();
     const fv = new FormData(form.current);
-
+    ;
     const nuevaVenta = {};
     fv.forEach((value, key) => {
       nuevaVenta[key] = value;
@@ -118,8 +119,7 @@ const RegisVentas = ({ setMostrarLista, setActualizarDatos  }) => {
         console.error(error);
         // toast.error('Error al registrar una Venta');
       });
-
-    setMostrarLista(true);
+      setMostrarLista(true)
   };
 
   return (
@@ -243,24 +243,80 @@ const RegisVentas = ({ setMostrarLista, setActualizarDatos  }) => {
   )
 };
 
-const ListVentas = ({ listaventas, form, setActualizarDatos, editarFila }) => {
+const ListVentas = ({ listaventas, setEditar, setActualizarDatos }) => {
 
-  
+  const form = useRef(null);
 
+  const [buscador, setBuscador] = useState('');
+  const [filtroVentas, setFiltroVentas] = useState(listaventas);
 
   useEffect(() => {
-    console.log('lista de Ventas', listaventas);
-  }, [listaventas]);
+    setFiltroVentas(
+      listaventas.filter(elemento => {
+        console.log('elemento', elemento);
+        return JSON.stringify(elemento).toLowerCase().includes(buscador.toLowerCase());
+      })
+    );
+  }, [buscador, listaventas]);
 
- 
+
+  const editarFila = async (e) => {
+    e.preventDefault();
+    console.log(e);
+    const fe = new FormData(form.current);
+
+    const editarVenta = {};
+    fe.forEach((value, key) => {
+      editarVenta[key] = value;
+    });
+
+    const options = {
+      method: 'PATCH',
+      url: 'http://localhost:5000/ventas/editar',
+      headers: { 'Content-Type': 'application/json' },
+      data: {
+        id: editarVenta._id,
+        fecha: editarVenta.fecha,
+        idProducto: editarVenta.idProducto,
+        nombreProducto: editarVenta.nombreProducto,
+        idCliente: editarVenta.idCliente,
+        cantidadProducto: editarVenta.cantidadProducto,
+        nombreCliente: editarVenta.nombreCliente,
+        precioUnitario: editarVenta.precioUnitario,
+        nombreVendedor: editarVenta.nombreVendedor,
+        totalVenta: editarVenta.totalVenta
+      }
+    };
+
+    await axios
+      .request(options).then(function (response) {
+        console.log(response.data);
+        // toast.success('venta editada con éxito');
+        setEditar(false)
+      }).catch(function (error) {
+        console.error(error);
+        // toast.error('Error al editar una Venta');
+      });
+    console.log('ventas:', editarVenta);
+  };
   return (
     <>
-      <div className="bg-white px-6 py-3 shadow-2xl">
+      <div className='bg-white px-6 py-3 shadow-2xl'>
         <div>
-          <h2 className="text-3xl text-center pb-10 text-principal ">Listado de Ventas</h2>
+          <h2 className='text-3xl text-center pb-10 text-principal '>Listado de Ventas</h2>
+        </div>
+        <div className='flex justify-center items-center'>
+          <input
+            value={buscador}
+            onChange={(e) => setBuscador(e.target.value)}
+            type='text'
+            className='rounded-full h-10 p-2 m-2 border border-gray-400 w-2/6 focus:outline-none focus:border-transparent focus:ring focus:ring-principal shadow-lg'
+            placeholder='Burcar Venta'
+
+          />
         </div>
         <form ref={form} onSubmit={editarFila}>
-          <table className="tabla">
+          <table className='tabla'>
 
             <thead>
               <tr>
@@ -279,9 +335,9 @@ const ListVentas = ({ listaventas, form, setActualizarDatos, editarFila }) => {
             </thead>
             <tbody>
               {
-                listaventas.map((ventas) => {
+                filtroVentas.map((ventas) => {
                   return (
-                    <EditarVenta key={nanoid()} ventas={ventas}  setActualizarDatos={setActualizarDatos} />
+                    <EditarVenta key={nanoid()} ventas={ventas} setActualizarDatos={setActualizarDatos} editarFila={editarFila} />
                   )
                 })
               }
@@ -293,57 +349,27 @@ const ListVentas = ({ listaventas, form, setActualizarDatos, editarFila }) => {
   )
 };
 
-const EditarVenta = ({ ventas, setActualizarDatos }) => {
-  const form = useRef(null);
-  const [editar, setEditar] = useState(false);
-  
-  const editarFila = async (e) => {
-    e.preventDefault();
-    console.log(e);
-    const fe = new FormData(form.current);
+const EditarVenta = ({ ventas, editarFila, setActualizarDatos }) => {
 
-    const editarVenta = {};
-    fe.forEach((value, key) => {
-      editarVenta[key] = value;
-    });
+  const [editar, setEditar] = useState(false);
+
+
+  const eliminarVenta = async () => {
 
     const options = {
-      method: 'PATCH',
-      url: 'http://localhost:5000/ventas/editar',
+      method: 'DELETE',
+      url: 'http://localhost:5000/ventas/eliminar',
       headers: { 'Content-Type': 'application/json' },
-      data: {
-        id: editarVenta._id,
-      }
+      data: { id: ventas._id }
     };
 
     await axios
       .request(options).then(function (response) {
         console.log(response.data);
-        // toast.success('venta editada con éxito');
-        setEditar(false)
+        setActualizarDatos(true);
       }).catch(function (error) {
         console.error(error);
-        // toast.error('Error al editar una Venta');
       });
-    console.log('ventas:', editarVenta);
-  };
-
-  const eliminarVenta = async () => {
-    
-    const options = {
-      method: 'DELETE',
-      url: 'http://localhost:5000/ventas/eliminar',
-      headers: {'Content-Type': 'application/json'},
-      data: { id: ventas._id }
-    };
-
-    await axios
-    .request(options).then(function (response) {
-      console.log(response.data);
-      setActualizarDatos(true);
-    }).catch(function (error) {
-      console.error(error);
-    });
   }
   return (
     <tr>
@@ -407,6 +433,5 @@ const EditarVenta = ({ ventas, setActualizarDatos }) => {
 
 
 export default Ventas;
-
 
 
