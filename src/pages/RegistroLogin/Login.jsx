@@ -31,7 +31,7 @@ const Login = () => {
                 <div className="flex justify-between px-5">
                     <div className="w-2/5">
                         <Link to="/">
-                            <button className="boton w-full" type="submit">Iniciar sesión</button>
+                            <button className="boton w-full " type="submit">Iniciar sesión</button>
                         </Link>
                     </div>
                     <div className="w-2/5">
