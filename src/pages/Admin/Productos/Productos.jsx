@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { nanoid } from 'nanoid';
+import { getProductos, postProductos, patchProductos, deleteProductos } from '../../../utils/CRUD';
 
 const Productos = () => {
     const [mostrarLista, setMostrarLista] = useState(true);
@@ -8,31 +9,24 @@ const Productos = () => {
     const [ActualizarDatos, setActualizarDatos] = useState(true);
 
     useEffect(() => {
-        const getProductos = async () => {
-
-            const options = { method: 'GET', url: 'http://localhost:5000/Productos' };
-
-            await axios
-                .request(options).then(function (response) {
-                    console.log(response.data);
-                    setProductos(response.data);
-                }).catch(function (error) {
-                    console.error(error);
-                });
-            setActualizarDatos(false);
-        };
         if (ActualizarDatos) {
-            getProductos();
+            getProductos(
+                (response) => {
+                    setProductos(response.data);
+                },
+                (error) => {
+                    console.error(error);
+                }
+            );
+            setActualizarDatos(false);
         }
     }, [ActualizarDatos])
 
     useEffect(() => {
         //obtener/GET lista de Productos desde el backend
-
         if (mostrarLista) {
             setActualizarDatos(true);
         }
-
     }, [mostrarLista]);
     console.log("mostrar:", mostrarLista, productos);
 
@@ -71,28 +65,21 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
             nuevoProducto[key] = value;
         });
 
-        const options = {
-            method: 'POST',
-            url: 'http://localhost:5000/productos',
-            headers: { 'Content-Type': 'application/json' },
-            data: {
-                idProducto: nuevoProducto.idProducto,
-                nombreProducto: nuevoProducto.nombreProducto,
-                descripcionProducto: nuevoProducto.descripcionProducto,
-                precioUnitario: nuevoProducto.precioUnitario,
-                estado: nuevoProducto.estado
-            }
-        };
-
-        await axios
-            .request(options).then(function (response) {
+        await postProductos({
+            idProducto: nuevoProducto.idProducto,
+            nombreProducto: nuevoProducto.nombreProducto,
+            descripcionProducto: nuevoProducto.descripcionProducto,
+            precioUnitario: nuevoProducto.precioUnitario,
+            estado: nuevoProducto.estado
+        },
+            (response) => {
                 console.log(response.data);
-                // toast.success('Producto registrada con éxito');
                 setActualizarDatos(true);
-            }).catch(function (error) {
+            },
+            (error) => {
                 console.error(error);
-                // toast.error('Error al registrar una Producto');
-            });
+            }
+        )
         setMostrarLista(true)
     };
 
@@ -106,7 +93,7 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                 </div>
                 <div className="flex space-x-4 mb-3">
                     <div className="w-1/2">
-                        <label className="pl-3"                         htmlFor="idProducto">Id Producto</label>
+                        <label className="pl-3" htmlFor="idProducto">Id Producto</label>
                         <input
                             className="input"
                             type="number"
@@ -127,11 +114,11 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                 </div>
                 <div className="flex space-x-4 mb-3">
                     <div className="w-1/2">
-                        <label className="pl-3"  htmlFor="descripcionProducto">Descripción</label>
+                        <label className="pl-3" htmlFor="descripcionProducto">Descripción</label>
                         <textarea
                             className="input resize-none"
                             name="descripcionProducto"
-                           
+
                             required
                         />
                     </div>
@@ -140,7 +127,7 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                         <input
                             className="input"
                             type="number"
-                            
+
                             name="precioUnitario"
                             required
                         />
@@ -149,7 +136,7 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                 <div className="flex justify-center space-x-4 mb-3">
                     <div className="w-1/2">
                         <label className="pl-3" htmlFor="estado" >Estado</label>
-                        <select className="input"  name="estado" required>
+                        <select className="input" name="estado" required>
                             <option value='' disabled>
                                 Seleccione un estado
                             </option>
@@ -184,7 +171,7 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
     )
 };
 
-const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, cambioBoton, mostrarLista }) => {
+const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, mostrarLista }) => {
 
     const [buscador, setBuscador] = useState('');
     const [filtroProductos, setFiltroProductos] = useState(listaProductos);
@@ -238,9 +225,9 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, ca
                     </thead>
                     <tbody>
                         {
-                            filtroProductos.map((Productos) => {
+                            filtroProductos.map((productos) => {
                                 return (
-                                    <EditarProducto key={nanoid()} Productos={Productos} setActualizarDatos={setActualizarDatos} />
+                                    <EditarProducto key={nanoid()} productos={productos} setActualizarDatos={setActualizarDatos} />
                                 )
                             })
                         }
@@ -251,52 +238,66 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, ca
     )
 };
 
-const EditarProducto = ({ Productos, setActualizarDatos }) => {
+const EditarProducto = ({ productos, setActualizarDatos }) => {
 
     const [editar, setEditar] = useState(false);
     const [datosProductoEditado, setDatosProductoEditado] = useState({
-        idProducto: Productos.idProducto,
-        nombreProducto: Productos.nombreProducto,
-        descripcionProducto: Productos.descripcionProducto,
-        precioUnitario: Productos.precioUnitario,
-        estado: Productos.estado
+        idProducto: productos.idProducto,
+        nombreProducto: productos.nombreProducto,
+        descripcionProducto: productos.descripcionProducto,
+        precioUnitario: productos.precioUnitario,
+        estado: productos.estado
     });
 
     const editarProducto = async () => {
         // Patch - editar datos - Enviar al Backend
-        const options = {
-            method: 'PATCH',
-            url: `http://localhost:5000/Productos/${Productos._id}`,
-            headers: { 'Content-Type': 'application/json' },
-            data: { ...datosProductoEditado }
-        };
 
-        await axios
-            .request(options).then(function (response) {
+        await patchProductos(productos._id,
+            {
+                idProducto: datosProductoEditado.idProducto,
+                nombreProducto: datosProductoEditado.nombreProducto,
+                descripcionProducto: datosProductoEditado.descripcionProducto,
+                precioUnitario: datosProductoEditado.precioUnitario,
+                estado: datosProductoEditado.estado
+            },
+            (response) => {
                 console.log(response.data);
                 setEditar(false);
                 setActualizarDatos(true)
-            }).catch(function (error) {
+            },
+            (error) => {
                 console.error(error);
-            });
-        console.log('editados:', datosProductoEditado);
+            }
+        );
+    
     }
 
     const eliminarProducto = async () => {
 
-        const options = {
-            method: 'DELETE',
-            url: `http://localhost:5000/Productos/${Productos._id}`,
-            headers: { 'Content-Type': 'application/json' }
-        };
+        await deleteProductos(
+            productos._id,
+            (response) => {
+              console.log(response.data);
+              setActualizarDatos(true);
+            },
+            (error) => {
+              console.error(error);
+            }
+            );
 
-        await axios
-            .request(options).then(function (response) {
-                console.log(response.data);
-                setActualizarDatos(true);
-            }).catch(function (error) {
-                console.error(error);
-            });
+        // const options = {
+        //     method: 'DELETE',
+        //     url: `http://localhost:5000/Productos/${productos._id}`,
+        //     headers: { 'Content-Type': 'application/json' }
+        // };
+
+        // await axios
+        //     .request(options).then(function (response) {
+        //         console.log(response.data);
+        //         setActualizarDatos(true);
+        //     }).catch(function (error) {
+        //         console.error(error);
+        //     });
     }
 
     return (
@@ -345,11 +346,11 @@ const EditarProducto = ({ Productos, setActualizarDatos }) => {
                     </>
                 ) : (
                     <>
-                        <td>{Productos.idProducto}</td>
-                        <td>{Productos.nombreProducto}</td>
-                        <td>{Productos.descripcionProducto}</td>
-                        <td>{Productos.precioUnitario}</td>
-                        <td>{Productos.estado}</td>
+                        <td>{productos.idProducto}</td>
+                        <td>{productos.nombreProducto}</td>
+                        <td>{productos.descripcionProducto}</td>
+                        <td>{productos.precioUnitario}</td>
+                        <td>{productos.estado}</td>
                     </>
                 )
             }

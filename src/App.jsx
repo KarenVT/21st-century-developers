@@ -11,6 +11,7 @@ import Ventas from './pages/Admin/Ventas/Ventas';
 import Productos from './pages/Admin/Productos/Productos';
 import Roles from './pages/Admin/Roles/Roles';
 
+
 function App() {
   return (
     <Router>
@@ -24,11 +25,9 @@ function App() {
               <Route path="/Admin/Ventas/IndexAdmin">
                 <Admin />
               </Route>
-
               <Route path='/Admin/Productos'>
                 <Productos />
               </Route>
-
               <Route path='/Admin/Ventas'>
                 <Ventas />
               </Route>
