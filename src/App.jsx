@@ -10,9 +10,15 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Ventas from './pages/Admin/Ventas/Ventas';
 import Productos from './pages/Admin/Productos/Productos';
 import Roles from './pages/Admin/Roles/Roles';
+import { Auth0Provider } from "@auth0/auth0-react";
 
 function App() {
   return (
+    <Auth0Provider
+     domain="misiontic-modaexpress.us.auth0.com"
+    clientId="lBgjMzJEBs4GZS9XP7FQ27iJw7kYDe4j"
+    redirectUri={window.location.origin}
+    >
     <Router>
       <Switch>
         <Route path={['/Admin', '/Admin/Ventas', '/Admin/Productos', '/Admin/Ventas/IndexAdmin', '/Roles']}>
@@ -62,6 +68,7 @@ function App() {
         </Route>
       </Switch>
     </Router>
+    </Auth0Provider>
   );
 }
 
