@@ -12,7 +12,6 @@ import Productos from './pages/Admin/Productos/Productos';
 import Roles from './pages/Admin/Roles/Roles';
 import { Auth0Provider } from "@auth0/auth0-react";
 
-
 function App() {
   return (
     <Auth0Provider
@@ -31,9 +30,11 @@ function App() {
               <Route path="/Admin/Ventas/IndexAdmin">
                 <Admin />
               </Route>
+
               <Route path='/Admin/Productos'>
                 <Productos />
               </Route>
+
               <Route path='/Admin/Ventas'>
                 <Ventas />
               </Route>

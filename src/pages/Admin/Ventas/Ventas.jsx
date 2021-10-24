@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
 import { nanoid } from 'nanoid';
-import { getVentas, postVentas, patchVentas, deleteVentas, getUsuarios } from '../../../utils/CRUD';
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,34 +9,23 @@ const Ventas = () => {
   const [mostrarLista, setMostrarLista] = useState(true);
   const [ventas, setVentas] = useState([]);
   const [ActualizarDatos, setActualizarDatos] = useState(true);
-  // const [productos, setProductos] = useState([]);
-  const [vendedores, setVendedores] = useState([]);
 
   useEffect(() => {
-    const listaVendedores = async () => {
-      await getUsuarios(
-        (response) => {
-          setVendedores(response.data);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    };
-    listaVendedores();
-  }, []);
+    const getVentas = async () => {
 
-  useEffect(() => {
-    if (ActualizarDatos) {
-      getVentas(
-        (response) => {
+      const options = { method: 'GET', url: 'http://localhost:5000/ventas' };
+
+      await axios
+        .request(options).then(function (response) {
+          console.log(response.data);
           setVentas(response.data);
-        },
-        (error) => {
+        }).catch(function (error) {
           console.error(error);
-        }
-      );
+        });
       setActualizarDatos(false);
+    };
+    if (ActualizarDatos) {
+      getVentas();
     }
   }, [ActualizarDatos])
 
@@ -58,14 +47,12 @@ const Ventas = () => {
           Área de Administación de Ventas
         </h1>
         {mostrarLista ? (
-          <ListVentas listaventas={ventas} setActualizarDatos={setActualizarDatos} setMostrarLista={setMostrarLista} />
+          <ListVentas listaventas={ventas} setActualizarDatos={setActualizarDatos} setMostrarLista={setMostrarLista}/>
         ) : (
           <RegisVentas
             setMostrarLista={setMostrarLista}
             listaventas={ventas}
             setVentas={setVentas}
-            vendedores={vendedores}
-            setVendedores={setVendedores}
           />
         )}
         {/* <ToastContainer position='bottom-center' autoClose={5000} /> */}
@@ -75,7 +62,7 @@ const Ventas = () => {
   );
 };
 
-const RegisVentas = ({ setMostrarLista, mostrarLista, vendedores, setVendedores, setActualizarDatos, }) => {
+const RegisVentas = ({ setMostrarLista, mostrarLista, cambioBoton, setActualizarDatos,  }) => {
   const form = useRef(null);
 
   const submitForm = async (e) => {
@@ -87,27 +74,33 @@ const RegisVentas = ({ setMostrarLista, mostrarLista, vendedores, setVendedores,
       nuevaVenta[key] = value;
     });
 
-
-    await postVentas({
-      id: nuevaVenta.id,
-      fecha: nuevaVenta.fecha,
-      idProducto: nuevaVenta.idProducto,
-      nombreProducto: nuevaVenta.nombreProducto,
-      idCliente: nuevaVenta.idCliente,
-      cantidadProducto: nuevaVenta.cantidadProducto,
-      nombreCliente: nuevaVenta.nombreCliente,
-      precioUnitario: nuevaVenta.precioUnitario,
-      nombreVendedor: nuevaVenta.nombreVendedor,
-      totalVenta: nuevaVenta.totalVenta
-    },
-      (response) => {
-        console.log(response.data);
-        setActualizarDatos(true);
-      },
-      (error) => {
-        console.error(error);
+    const options = {
+      method: 'POST',
+      url: 'http://localhost:5000/ventas',
+      headers: { 'Content-Type': 'application/json' },
+      data: {
+        id: nuevaVenta.id,
+        fecha: nuevaVenta.fecha,
+        idProducto: nuevaVenta.idProducto,
+        nombreProducto: nuevaVenta.nombreProducto,
+        idCliente: nuevaVenta.idCliente,
+        cantidadProducto: nuevaVenta.cantidadProducto,
+        nombreCliente: nuevaVenta.nombreCliente,
+        precioUnitario: nuevaVenta.precioUnitario,
+        nombreVendedor: nuevaVenta.nombreVendedor,
+        totalVenta: nuevaVenta.totalVenta
       }
-    )
+    };
+
+    await axios
+      .request(options).then(function (response) {
+        console.log(response.data);
+        // toast.success('venta registrada con éxito');
+        setActualizarDatos(true);
+      }).catch(function (error) {
+        console.error(error);
+        // toast.error('Error al registrar una Venta');
+      });
     setMostrarLista(true)
   };
 
@@ -202,20 +195,13 @@ const RegisVentas = ({ setMostrarLista, mostrarLista, vendedores, setVendedores,
         </div>
         <div className="flex space-x-4 mb-3">
           <div className="w-1/2">
-            <label className="pl-3" htmlFor="nombreVendedor">Vendedores</label>
-            <select
+            <label className="pl-3" htmlFor="nombreVendedor">Nombre Vendedor</label>
+            <input
               className="input"
               type="text"
               name="nombreVendedor"
-              defaultValue={-1}
-              required>
-              <option value={-1} disabled>
-                Seleccione un estado
-              </option>
-              {vendedores.map((e) => {
-                return <option value={e._id}>{`${e.nombre}`}</option>;
-              })}
-            </select>
+              required
+            />
           </div>
           <div className="w-1/2">
             <label className="pl-3" htmlFor="totalVenta">Total Venta</label>
@@ -249,7 +235,7 @@ const RegisVentas = ({ setMostrarLista, mostrarLista, vendedores, setVendedores,
   )
 };
 
-const ListVentas = ({ listaventas, setActualizarDatos, setMostrarLista, mostrarLista }) => {
+const ListVentas = ({ listaventas, setActualizarDatos, setMostrarLista, cambioBoton, mostrarLista }) => {
 
   const [buscador, setBuscador] = useState('');
   const [filtroVentas, setFiltroVentas] = useState(listaventas);
@@ -271,16 +257,16 @@ const ListVentas = ({ listaventas, setActualizarDatos, setMostrarLista, mostrarL
         </div>
         <div className='flex justify-around items-center'>
 
-          <div >
-            <input
-              value={buscador}
-              onChange={(e) => setBuscador(e.target.value)}
-              type='text'
-              className='rounded-full h-10 w-full p-2 m-2 border border-gray-400  focus:outline-none focus:border-transparent focus:ring focus:ring-principal shadow-lg'
-              placeholder='Burcar Venta'
-            />
-          </div>
-          <div className="w-2/12  ">
+        <div >
+          <input
+            value={buscador}
+            onChange={(e) => setBuscador(e.target.value)}
+            type='text'
+            className='rounded-full h-10 w-full p-2 m-2 border border-gray-400  focus:outline-none focus:border-transparent focus:ring focus:ring-principal shadow-lg'
+            placeholder='Burcar Venta'
+          />
+        </div>
+        <div className="w-2/12  ">
             <button
               onClick={() => {
                 setMostrarLista(mostrarLista)
@@ -301,7 +287,7 @@ const ListVentas = ({ listaventas, setActualizarDatos, setMostrarLista, mostrarL
               <th >Nombre Cliente</th>
               <th >Cantidad Producto</th>
               <th >Precio Unitario</th>
-              <th >Nombre Vendedores</th>
+              <th >Nombre Vendedor</th>
               <th >Total Venta</th>
               <th >Acciones</th>
             </tr>
@@ -325,7 +311,6 @@ const EditarVenta = ({ ventas, setActualizarDatos }) => {
 
   const [editar, setEditar] = useState(false);
   const [datosVentaEditada, setDatosVentaEditada] = useState({
-    _id: ventas._id,
     id: ventas.id,
     fecha: ventas.fecha,
     idProducto: ventas.idProducto,
@@ -340,43 +325,39 @@ const EditarVenta = ({ ventas, setActualizarDatos }) => {
 
   const editarVenta = async () => {
     // Patch - editar datos - Enviar al Backend
+    const options = {
+      method: 'PATCH',
+      url: `http://localhost:5000/ventas/${ventas._id}`,
+      headers: { 'Content-Type': 'application/json' },
+      data: { ...datosVentaEditada}
+    };
 
-    await patchVentas(ventas._id,
-      {
-        id: datosVentaEditada.id,
-        fecha: datosVentaEditada.fecha,
-        idProducto: datosVentaEditada.idProducto,
-        nombreProducto: datosVentaEditada.nombreProducto,
-        idCliente: datosVentaEditada.idProducto,
-        cantidadProducto: datosVentaEditada.cantidadProducto,
-        nombreCliente: datosVentaEditada.nombreCliente,
-        precioUnitario: datosVentaEditada.precioUnitario,
-        nombreVendedor: datosVentaEditada.nombreVendedor,
-        totalVenta: datosVentaEditada.totalVenta
-      },
-      (response) => {
+    await axios
+      .request(options).then(function (response) {
         console.log(response.data);
         setEditar(false);
-        setActualizarDatos(true);
-      },
-      (error) => {
+        setActualizarDatos(true)
+      }).catch(function (error) {
         console.error(error);
-      }
-    );
+      });
+    console.log('editados:', datosVentaEditada);
   }
 
   const eliminarVenta = async () => {
 
-    await deleteVentas(
-      ventas._id,
-      (response) => {
+    const options = {
+      method: 'DELETE',
+      url: `http://localhost:5000/ventas/${ventas._id}`,
+      headers: { 'Content-Type': 'application/json' }
+    };
+
+    await axios
+      .request(options).then(function (response) {
         console.log(response.data);
         setActualizarDatos(true);
-      },
-      (error) => {
+      }).catch(function (error) {
         console.error(error);
-      }
-    );
+      });
   }
 
   return (
