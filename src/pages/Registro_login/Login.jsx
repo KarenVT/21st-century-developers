@@ -8,11 +8,11 @@ const Login = () => {
             <h2 className="m-4 text-center text-3xl text-principal px-12">INICIA SESIÓN </h2>
                 <div>
                 <label for="email">Usuario</label>
-                    <input className="input shadow-lg" type="email" placeholder="@c.com" required />
+                    <input className="input shadow-lg" type="email" placeholder="correo electrónico" required />
                 </div>
                 <div >
                 <label for="password">Contraseña</label>
-                    <input className="input shadow-lg" type="password" required />
+                    <input className="input shadow-lg" type="password" placeholder="contraseña" required />
                 </div>
 
                 <div className="flex justify-between p-2">
