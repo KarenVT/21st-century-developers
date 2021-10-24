@@ -12,7 +12,6 @@ import Productos from './pages/Admin/Productos/Productos';
 import Roles from './pages/Admin/Roles/Roles';
 import { Auth0Provider } from "@auth0/auth0-react";
 
-
 function App() {
   return (
     <Auth0Provider
