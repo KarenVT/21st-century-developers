@@ -16,7 +16,7 @@ body {
 }
 
 .boton {
-  @apply rounded-full h-10 px-2 bg-principal text-white shadow-lg;
+  @apply rounded-full h-10 px-2 bg-principal text-white shadow-lg hover:bg-paleta3 hover:bg-opacity-40 hover:text-principal;
 }
   
 .tabla th,
@@ -26,16 +26,16 @@ body {
 }
 
 .tabla th {
-  background-color:violet;
+  background-color: #5e548e;
   text-align: center;
 }
 
 .tabla tr:nth-child(even) {
-  background-color: #e0b1cb;
+  background-color: rgba(159, 134, 193,0.5);
 }
 
 .tabla tr:hover {
-  background-color: #e0b1cb;
+  background-color: rgba(159, 134, 193,0.3) ;
   cursor: pointer;
 
 }

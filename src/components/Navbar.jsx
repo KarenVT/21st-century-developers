@@ -48,19 +48,19 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {mostrarNavegacion && (                
-            <div className="sm:hidden" id="menu">
-                <div className="px-2 pt-2 pb-3 space-y-1">
+            {mostrarNavegacion && (
+                <div className="sm:hidden" id="menu">
+                    <div className="px-2 pt-2 pb-3 space-y-1">
 
-                    <i href="#" className="bg-gray-900 text-white hover:bg-paleta3 hover:bg-opacity-40  block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Iniciar Sesión</i>
+                        <i href="#" className="bg-gray-900 text-white hover:bg-paleta3 hover:bg-opacity-40  block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Iniciar Sesión</i>
 
-                    <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Team</i>
+                        <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Team</i>
 
-                    <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Projects</i>
+                        <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Projects</i>
 
-                    <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Calendar</i>
+                        <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Calendar</i>
+                    </div>
                 </div>
-            </div>
             )}
         </nav>
     )
