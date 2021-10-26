@@ -21,14 +21,11 @@ function App() {
     >
     <Router>
       <Switch>
-        <Route path={['/Admin', '/Admin/Ventas', '/Admin/Productos', '/Admin/Ventas/IndexAdmin', '/Roles']}>
+        <Route path={['/Admin', '/Admin/Ventas', '/Admin/Productos','/Roles']}>
           <PrivateLayaut>
             <Switch>
               <Route path='/Roles'>
                 <Roles />
-              </Route>
-              <Route path="/Admin/Ventas/IndexAdmin">
-                <Admin />
               </Route>
 
               <Route path='/Admin/Productos'>

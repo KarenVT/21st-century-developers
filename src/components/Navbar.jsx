@@ -13,7 +13,7 @@ const Navbar = () => {
     const [mostrarNavegacion, setMostrarNavegacion] = useState(false);
     return (
 
-        <nav className="bg-paleta5 bg-opacity-20 flex flex-col items-center">
+        <nav className="bg-paleta5 bg-opacity-20 ">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-16">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -46,18 +46,18 @@ const Navbar = () => {
 
                                 </i>
 
-                                <Link to="../Admin/IndesxAdmin" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Admin</Link> 
-                                
+                                <Link to="../Admin/ " className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Admin</Link>
+
 
                                 <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">Projects</i>
 
                                 <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">Calendar</i>
-                                
+
                                 <i id="boton" type="button" className="bg-principal text-white hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">
                                     <button onClick={() => logout({ returnTo: window.location.origin })}
                                     >Cerrar sesión</button>
                                 </i>
-                                
+
                             </div>
                         </div>
                     </div>

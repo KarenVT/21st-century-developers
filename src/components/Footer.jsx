@@ -7,7 +7,7 @@ const Footer = () => {
                 21st Century Developers
             </footer>
         </div>
-    )
+    );
 }
 
 export default Footer;

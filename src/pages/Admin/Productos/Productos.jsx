@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
 import { nanoid } from 'nanoid';
+import { getProductos, postProductos, patchProductos, deleteProductos } from '../../../utils/apis/Productos';
 
 const Productos = () => {
     const [mostrarLista, setMostrarLista] = useState(true);
@@ -8,33 +8,33 @@ const Productos = () => {
     const [ActualizarDatos, setActualizarDatos] = useState(true);
 
     useEffect(() => {
-        const getProductos = async () => {
+        const fetchProductos = async () => {
 
-            const options = { method: 'GET', url: 'http://localhost:5000/Productos' };
-
-            await axios
-                .request(options).then(function (response) {
-                    console.log(response.data);
+            await getProductos(
+                (response) => {
                     setProductos(response.data);
-                }).catch(function (error) {
+                    setActualizarDatos(false);
+                },
+                (error) => {
                     console.error(error);
-                });
-            setActualizarDatos(false);
+                }
+            );
         };
+        console.log('consulta', ActualizarDatos);
         if (ActualizarDatos) {
-            getProductos();
+            fetchProductos();
         }
+
+
     }, [ActualizarDatos])
 
     useEffect(() => {
         //obtener/GET lista de Productos desde el backend
-
         if (mostrarLista) {
             setActualizarDatos(true);
         }
-
     }, [mostrarLista]);
-    console.log("mostrar:", mostrarLista, productos);
+    // console.log("mostrar:", mostrarLista, productos);
 
 
     return (
@@ -71,28 +71,21 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
             nuevoProducto[key] = value;
         });
 
-        const options = {
-            method: 'POST',
-            url: 'http://localhost:5000/productos',
-            headers: { 'Content-Type': 'application/json' },
-            data: {
-                idProducto: nuevoProducto.idProducto,
-                nombreProducto: nuevoProducto.nombreProducto,
-                descripcionProducto: nuevoProducto.descripcionProducto,
-                precioUnitario: nuevoProducto.precioUnitario,
-                estado: nuevoProducto.estado
-            }
-        };
-
-        await axios
-            .request(options).then(function (response) {
+        await postProductos({
+            idProducto: nuevoProducto.idProducto,
+            nombreProducto: nuevoProducto.nombreProducto,
+            descripcionProducto: nuevoProducto.descripcionProducto,
+            precioUnitario: nuevoProducto.precioUnitario,
+            estado: nuevoProducto.estado
+        },
+            (response) => {
                 console.log(response.data);
-                // toast.success('Producto registrada con éxito');
                 setActualizarDatos(true);
-            }).catch(function (error) {
+            },
+            (error) => {
                 console.error(error);
-                // toast.error('Error al registrar una Producto');
-            });
+            }
+        )
         setMostrarLista(true)
     };
 
@@ -106,11 +99,12 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                 </div>
                 <div className="flex space-x-4 mb-3">
                     <div className="w-1/2">
-                        <label className="pl-3"                         htmlFor="idProducto">Id Producto</label>
+                        <label className="pl-3" htmlFor="idProducto">Id Producto</label>
                         <input
                             className="input"
                             type="number"
                             name="idProducto"
+                            min={0}
                             required
                         />
                     </div>
@@ -125,13 +119,13 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                         />
                     </div>
                 </div>
-                <div className="flex space-x-4 mb-3">
+                <div className="flex space-x-4 mb-3 ">
                     <div className="w-1/2">
-                        <label className="pl-3"  htmlFor="descripcionProducto">Descripción</label>
+                        <label className="pl-3" htmlFor="descripcionProducto">Descripción</label>
                         <textarea
-                            className="input resize-none"
+                            className="input resize-none py-1 "
                             name="descripcionProducto"
-                           
+
                             required
                         />
                     </div>
@@ -140,7 +134,7 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                         <input
                             className="input"
                             type="number"
-                            
+
                             name="precioUnitario"
                             required
                         />
@@ -149,7 +143,7 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                 <div className="flex justify-center space-x-4 mb-3">
                     <div className="w-1/2">
                         <label className="pl-3" htmlFor="estado" >Estado</label>
-                        <select className="input"  name="estado" required>
+                        <select className="input" name="estado" required>
                             <option value='' disabled>
                                 Seleccione un estado
                             </option>
@@ -184,7 +178,7 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
     )
 };
 
-const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, cambioBoton, mostrarLista }) => {
+const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, mostrarLista }) => {
 
     const [buscador, setBuscador] = useState('');
     const [filtroProductos, setFiltroProductos] = useState(listaProductos);
@@ -215,7 +209,7 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, ca
                             placeholder='Burcar Producto'
                         />
                     </div>
-                    <div className="w-2/6     ">
+                    <div className="w-2/6">
                         <button
                             onClick={() => {
                                 setMostrarLista(mostrarLista)
@@ -238,9 +232,9 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, ca
                     </thead>
                     <tbody>
                         {
-                            filtroProductos.map((Productos) => {
+                            filtroProductos.map((productos) => {
                                 return (
-                                    <EditarProducto key={nanoid()} Productos={Productos} setActualizarDatos={setActualizarDatos} />
+                                    <EditarProducto key={nanoid()} productos={productos} setActualizarDatos={setActualizarDatos} />
                                 )
                             })
                         }
@@ -251,52 +245,54 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, ca
     )
 };
 
-const EditarProducto = ({ Productos, setActualizarDatos }) => {
+const EditarProducto = ({ productos, setActualizarDatos }) => {
 
     const [editar, setEditar] = useState(false);
     const [datosProductoEditado, setDatosProductoEditado] = useState({
-        idProducto: Productos.idProducto,
-        nombreProducto: Productos.nombreProducto,
-        descripcionProducto: Productos.descripcionProducto,
-        precioUnitario: Productos.precioUnitario,
-        estado: Productos.estado
+        _id: productos._id,
+        idProducto: productos.idProducto,
+        nombreProducto: productos.nombreProducto,
+        descripcionProducto: productos.descripcionProducto,
+        precioUnitario: productos.precioUnitario,
+        estado: productos.estado
     });
 
     const editarProducto = async () => {
         // Patch - editar datos - Enviar al Backend
-        const options = {
-            method: 'PATCH',
-            url: `http://localhost:5000/Productos/${Productos._id}`,
-            headers: { 'Content-Type': 'application/json' },
-            data: { ...datosProductoEditado }
-        };
 
-        await axios
-            .request(options).then(function (response) {
+        await patchProductos(productos._id,
+            {
+                idProducto: datosProductoEditado.idProducto,
+                nombreProducto: datosProductoEditado.nombreProducto,
+                descripcionProducto: datosProductoEditado.descripcionProducto,
+                precioUnitario: datosProductoEditado.precioUnitario,
+                estado: datosProductoEditado.estado
+            },
+            (response) => {
                 console.log(response.data);
                 setEditar(false);
                 setActualizarDatos(true)
-            }).catch(function (error) {
+            },
+            (error) => {
                 console.error(error);
-            });
-        console.log('editados:', datosProductoEditado);
+            }
+        );
+
     }
 
     const eliminarProducto = async () => {
 
-        const options = {
-            method: 'DELETE',
-            url: `http://localhost:5000/Productos/${Productos._id}`,
-            headers: { 'Content-Type': 'application/json' }
-        };
-
-        await axios
-            .request(options).then(function (response) {
+        await deleteProductos(
+            productos._id,
+            (response) => {
                 console.log(response.data);
                 setActualizarDatos(true);
-            }).catch(function (error) {
+            },
+            (error) => {
                 console.error(error);
-            });
+            }
+        );
+
     }
 
     return (
@@ -315,7 +311,7 @@ const EditarProducto = ({ Productos, setActualizarDatos }) => {
                             value={datosProductoEditado.nombreProducto}
                             onChange={(e) => setDatosProductoEditado({ ...datosProductoEditado, nombreProducto: e.target.value })}
                         /></td>
-                        <td><textarea name='descripcionProducto' className='input resize-none'
+                        <td><textarea name='descripcionProducto' className='input resize-none mt-2 py-1'
                             value={datosProductoEditado.descripcionProducto}
                             onChange={(e) => setDatosProductoEditado({ ...datosProductoEditado, descripcionProducto: e.target.value })}
                         />
@@ -345,11 +341,11 @@ const EditarProducto = ({ Productos, setActualizarDatos }) => {
                     </>
                 ) : (
                     <>
-                        <td>{Productos.idProducto}</td>
-                        <td>{Productos.nombreProducto}</td>
-                        <td>{Productos.descripcionProducto}</td>
-                        <td>{Productos.precioUnitario}</td>
-                        <td>{Productos.estado}</td>
+                        <td>{productos.idProducto}</td>
+                        <td>{productos.nombreProducto}</td>
+                        <td>{productos.descripcionProducto}</td>
+                        <td>{productos.precioUnitario}</td>
+                        <td>{productos.estado}</td>
                     </>
                 )
             }
