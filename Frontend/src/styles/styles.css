@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "IBM Plex Serif", serif;
+}
+
+body {
+  background: url(../media/fondo.jpg) no-repeat center fixed;
+  background-size: cover;
+}
+
+.input {
+  @apply rounded-full h-10 px-2 border border-gray-400 w-full focus:outline-none focus:border-transparent focus:ring focus:ring-principal shadow-lg;
+}
+
+.boton {
+  @apply rounded-full h-10 px-2 bg-principal text-white shadow-lg hover:bg-paleta3 hover:bg-opacity-40 hover:text-principal;
+}
+  
+.tabla th,
+.tabla td {
+  padding: 15px;
+  margin: 5px;
+}
+
+.tabla th {
+  background-color: #5e548e;
+  text-align: center;
+}
+
+.tabla tr:nth-child(even) {
+  background-color: rgba(159, 134, 193,0.5);
+}
+
+.tabla tr:hover {
+  background-color: rgba(159, 134, 193,0.3) ;
+  cursor: pointer;
+
+}
+
+.img {
+  background: url(/src/media/productos.png);
+  background-size: cover;
+  height: 200px;
+  width: 400px;
+}
+.img2 {
+  background: url(/src/media/ventas.jpg);
+  background-size: cover;
+  height: 200px;
+  width: 400px;
+}
