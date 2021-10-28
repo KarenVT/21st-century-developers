@@ -32,7 +32,7 @@ rutasVentas.route("/ventas/:id/").patch((req, res) => {
     patchVentas(req.params.id, req.body, callbackGeneral(res));
 });
 
-rutasVentas.route("/ventas/:id/ ").delete((req, res) => {
+rutasVentas.route("/ventas/:id/").delete((req, res) => {
     deleteVentas(req.params.id, callbackGeneral(res));
 });
 

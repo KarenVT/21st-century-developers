@@ -219,6 +219,7 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, mo
                         </button>
                     </div>
                 </div>
+                
                 <table className='tabla'>
                     <thead>
                         <tr>
@@ -297,7 +298,6 @@ const EditarProducto = ({ productos, setActualizarDatos }) => {
 
     return (
         <tr>
-
             {
                 // campos para editar los datos de Productos ya registrados
                 editar ? (

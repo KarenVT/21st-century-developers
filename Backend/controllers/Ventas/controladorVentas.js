@@ -22,13 +22,13 @@ const postVentas = async (datosVentas, callback) => {
     if (
         Object.keys(datosVentas).includes("id") &&
         Object.keys(datosVentas).includes("fecha") &&
-        Object.keys(datosVentas).includes("idProducto") &&
+        // Object.keys(datosVentas).includes("idProducto") &&
         Object.keys(datosVentas).includes("nombreProducto") &&
         Object.keys(datosVentas).includes("idCliente") &&
         Object.keys(datosVentas).includes("cantidadProducto") &&
         Object.keys(datosVentas).includes("nombreCliente") &&
         Object.keys(datosVentas).includes("nombreVendedor") &&
-        Object.keys(datosVentas).includes("precioUnitario") &&
+        // Object.keys(datosVentas).includes("precioUnitario") &&
         Object.keys(datosVentas).includes("totalVenta")
     ) {
         //implementar codigo para crear un Venta en la base de datos 
