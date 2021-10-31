@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Profile = ({ children }) => {
     const { user, isAuthenticated, isLoading } = useAuth0();
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <div className="text-7xl text-red-600">Loading...</div>;
 
     return isAuthenticated ? (
         <>{children}</>
