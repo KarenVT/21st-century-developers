@@ -361,7 +361,7 @@ const FilaProducto = ({ prd, index, eliminarProducto, modificarProducto }) => {
             <td>{producto.precioUnitario}</td>
             <td>
                 <label htmlFor={`cantidadProducto-${index}`}></label>
-                {/* <input
+                <input
                     className="input"
                     type="number"
                     value={producto.cantidadProducto}
@@ -374,7 +374,7 @@ const FilaProducto = ({ prd, index, eliminarProducto, modificarProducto }) => {
                             totalVenta: parseFloat(producto.precioUnitario) * parseFloat(e.target.value === "" ? "0" : e.target.value),
                         });
                     }}
-                /> */}
+                />
             </td>
             <td>{parseFloat(producto.totalVenta ?? 0)}</td>
             <td><i onClick={() => eliminarProducto(producto)} className="fas fa-minus px-3 bg-paleta3"></i></td>

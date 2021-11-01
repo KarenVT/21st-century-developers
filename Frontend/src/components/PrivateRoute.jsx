@@ -13,6 +13,7 @@ useEffect(() => {
     });
     // este codigo sirve para guardar el token en el local storage
     localStorage.setItem("token",accessToken);
+    console.log(accessToken);
     
     };       
     if(isAuthenticated){
