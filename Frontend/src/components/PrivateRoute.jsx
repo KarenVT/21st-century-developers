@@ -1,6 +1,7 @@
 import React ,{useEffect} from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from 'react-router-dom';
+import { obteberDatosUsuario } from '../utils/apis/Usuarios';
 
 
 const Profile = ({ children }) => {
@@ -14,6 +15,17 @@ useEffect(() => {
     // este codigo sirve para guardar el token en el local storage
     localStorage.setItem("token",accessToken);
     console.log(accessToken);
+
+    await obteberDatosUsuario(
+        (Response) => {
+            console.log('respose', Response);
+        },
+        (err) =>{
+            console.log('err',err);
+        }
+    );
+
+
     
     };       
     if(isAuthenticated){

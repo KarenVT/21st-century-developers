@@ -17,6 +17,19 @@ export const getUsuarios = async (successCallback, errorCallback) => {
     await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+//ruta para validar si el usuario existe en la base de datos si no agregarlo
+export const obteberDatosUsuario = async (successCallback, errorCallback) => {
+    const options = {
+        method: 'GET',
+        url: 'http://localhost:5000/usuarios/self',
+        headers: { 
+        Authorization: getToken(),
+          },
+    };
+    await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+
 // export const postUsuarios = async (data, resCallBack, errorCallBack) => {
 
 //     const options = {

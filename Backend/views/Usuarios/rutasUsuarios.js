@@ -1,6 +1,6 @@
 import Express from 'express';
 
-import { deleteUsuarios, getUsuarios, patchUsuarios, postUsuarios } from '../../controllers/Usuarios/controladorUsuarios.js';
+import { consultarocrearusuario, deleteUsuarios, getUsuarios, patchUsuarios, postUsuarios } from '../../controllers/Usuarios/controladorUsuarios.js';
 const rutasUsuarios = Express.Router();
 
 const callbackGeneral = (res) => (err, resul) => {
@@ -12,7 +12,6 @@ const callbackGeneral = (res) => (err, resul) => {
     }
 }
 
-
 rutasUsuarios.route("/usuarios").get((req, res) => {
     console.log("se llama a registro Usuarios");
     //realizar una conexion a la base de datos para mostrar lo que hay en la colección
@@ -23,6 +22,13 @@ rutasUsuarios.route("/usuarios").get((req, res) => {
 rutasUsuarios.route("/usuarios").post((req, res) => {
     postUsuarios(req.body, callbackGeneral(res))
 });
+
+//crear la ruta para consultar usuarios con /self
+rutasUsuarios.route("/usuarios/self").get((req, res) => {
+    console.log("alguien hizo get en la rotua self");
+    consultarocrearusuario(req, callbackGeneral (res));
+});
+
 
 // rutasUsuarios.route("/Usuarios/:id").post((req, res) => {
 //     consultarPorUsuario(req.params.id, callbackGeneral(res))
