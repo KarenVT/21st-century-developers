@@ -1,10 +1,17 @@
 import axios from "axios";
 
+const getToken =() => {
+    return `bearer ${localStorage.getItem("token")}`;
+};
+
 //CRUD DE VENTAS
 export const getVentas = async (successCallback, errorCallback) => {
     const options = {
         method: 'GET',
         url: 'http://localhost:5000/ventas/',
+        headers: { 
+            Authorization: getToken(),
+              },
     };
     await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -14,8 +21,10 @@ export const postVentas = async (data, resCallBack, errorCallBack) => {
 
     const options = {
         method: 'POST',
-        url: 'http://localhost:5000/ventas/',
-        headers: { 'Content-Type': 'application/json' },
+        url: 'http://localhost:5000/Ventas/',
+        headers: { 'Content-Type': 'application/json' ,
+            Authorization: getToken(),
+    },
         data,
     };
 
@@ -29,6 +38,7 @@ export const patchVentas = async (id, data, resCallBack, errorCallBack) => {
         method: 'PATCH',
         url: `http://localhost:5000/ventas/${id}/`,
         headers: { 'Content-Type': 'application/json' },
+        Authorization: getToken(),
         data
     };
     await axios
@@ -39,7 +49,8 @@ export const deleteVentas = async (id, resCallBack, errorCallBack) => {
     const options = {
         method: 'DELETE',
         url: `http://localhost:5000/ventas/${id}/`,
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        Authorization: getToken(),
     };
     await axios
         .request(options).then(resCallBack).catch(errorCallBack);

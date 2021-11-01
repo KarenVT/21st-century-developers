@@ -8,6 +8,11 @@ const Navbar = () => {
 
     const { loginWithRedirect } = useAuth0();
     const { logout } = useAuth0();
+    //este codigo me sirve para que el Local Storage borre el token que guardo y vuelva a pedir el Token
+    const cerrarsesion = () => {
+        logout({ returnTo: window.location.origin });
+        localStorage.setItem("token", null);
+    };
 
 
     const [mostrarNavegacion, setMostrarNavegacion] = useState(false);
@@ -32,6 +37,16 @@ const Navbar = () => {
                         </button>
                     </div>
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                    {/*  */}
+                        <i id="boton" type="button" className="bg-principal text-white hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">
+
+
+                            <button
+                                onClick={() => loginWithRedirect()}
+                            >Perfil</button>
+
+                        </i>
+
                         <div className="flex-shrink-0 flex items-center">
                             <Link to="/Home/Index" className="text-2xl text-principal" htmlFor="">Moda Express</Link>
                         </div>
@@ -54,7 +69,7 @@ const Navbar = () => {
                                 <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">Calendar</i>
 
                                 <i id="boton" type="button" className="bg-principal text-white hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">
-                                    <button onClick={() => logout({ returnTo: window.location.origin })}
+                                    <button onClick={() => cerrarsesion()}
                                     >Cerrar sesión</button>
                                 </i>
 

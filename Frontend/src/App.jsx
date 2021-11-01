@@ -18,6 +18,8 @@ function App() {
      domain="misiontic-modaexpress.us.auth0.com"
     clientId="lBgjMzJEBs4GZS9XP7FQ27iJw7kYDe4j"
     redirectUri={window.location.origin}
+    // aqui se agrega la audiencia para poder pedir el token
+    audience="api-autenticacion"
     >
     <Router>
       <Switch>

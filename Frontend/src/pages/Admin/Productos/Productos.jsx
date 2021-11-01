@@ -24,8 +24,6 @@ const Productos = () => {
         if (ActualizarDatos) {
             fetchProductos();
         }
-
-
     }, [ActualizarDatos])
 
     useEffect(() => {

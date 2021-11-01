@@ -1,11 +1,29 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from 'react-router-dom';
 
 
 const Profile = ({ children }) => {
-    const { user, isAuthenticated, isLoading } = useAuth0();
-    if (isLoading) return <div className="text-7xl text-red-600">Loading...</div>;
+    const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+// este codigo me trae el token desde auth0
+useEffect(() => {
+    const fetchAuth0Token = async () => {
+       const accessToken = await getAccessTokenSilently({
+          audience: `api-autenticacion`,
+    });
+    // este codigo sirve para guardar el token en el local storage
+    localStorage.setItem("token",accessToken);
+    
+    };       
+    if(isAuthenticated){
+        fetchAuth0Token();
+    }
+    fetchAuth0Token();
+   }, [isAuthenticated, getAccessTokenSilently]);
+// hasta este punto va el codigo de llamar el token
+
+
+if (isLoading) return <div className="text-7xl text-red-600">Loading...</div>;
 
     return isAuthenticated ? (
         <>{children}</>
