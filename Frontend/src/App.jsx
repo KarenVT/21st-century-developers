@@ -11,19 +11,19 @@ import Ventas from './pages/Admin/Ventas/Ventas';
 import Productos from './pages/Admin/Productos/Productos';
 import Roles from './pages/Admin/Roles/Roles';
 import { Auth0Provider } from "@auth0/auth0-react";
+import Usuarios from './pages/Admin/Usuarios/Usuarios';
 
 function App() {
   return (
     <Auth0Provider
      domain="misiontic-modaexpress.us.auth0.com"
     clientId="lBgjMzJEBs4GZS9XP7FQ27iJw7kYDe4j"
-    redirectUri={window.location.origin}
     // aqui se agrega la audiencia para poder pedir el token
     audience="api-autenticacion"
     >
     <Router>
       <Switch>
-        <Route path={['/Admin', '/Admin/Ventas', '/Admin/Productos','/Roles']}>
+        <Route path={['/Admin', '/Admin/Ventas', '/Admin/Productos','/Roles','/Admin/Usuarios']}>
           <PrivateLayaut>
             <Switch>
               <Route path='/Roles'>
@@ -36,6 +36,9 @@ function App() {
 
               <Route path='/Admin/Ventas'>
                 <Ventas />
+              </Route>
+              <Route path='/Admin/Usuarios'>
+                <Usuarios />
               </Route>
               <Route path='/Admin'>
                 <Admin />

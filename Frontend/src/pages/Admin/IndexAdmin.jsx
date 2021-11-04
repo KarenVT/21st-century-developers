@@ -13,6 +13,12 @@ const Admin = () => {
                 <Link to="/Admin/Ventas">
                     <button className="bg-opacity-80  items-center text-white  text-3xl  bg-principal p-2 w-full hover:bg-principal hover:bg-opacity-50">Administración ventas</button>
                 </Link>
+                
+            </div>
+            <div className=" ">
+                <Link to="/Admin/Usuarios">
+                    <button className="bg-opacity-80  items-center text-white  text-3xl  bg-principal p-2 w-full hover:bg-principal hover:bg-opacity-50">Administración Usuarios</button>
+                </Link>
             </div>
         </div>
     )

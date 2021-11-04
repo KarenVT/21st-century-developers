@@ -18,7 +18,7 @@ const Navbar = () => {
     const [mostrarNavegacion, setMostrarNavegacion] = useState(false);
     return (
 
-        <nav className="bg-paleta5 bg-opacity-20  flex Flex items-center">
+        <nav className="bg-paleta5 bg-opacity-20 r">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-16">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -38,14 +38,6 @@ const Navbar = () => {
                     </div>
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     {/*  */}
-                        <i id="boton" type="button" className="bg-principal text-white hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">
-
-
-                            <button
-                                onClick={() => loginWithRedirect()}
-                            >Perfil</button>
-
-                        </i>
 
                         <div className="flex-shrink-0 flex items-center">
                             <Link to="/Home/Index" className="text-2xl text-principal" htmlFor="">Moda Express</Link>
