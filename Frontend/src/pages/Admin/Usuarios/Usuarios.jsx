@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getUsuarios, patchUsuarios, } from '../../../utils/apis/Usuarios';
 import { nanoid } from 'nanoid';
+import PrivateComponent from "../../../components/PrivateComponent";
+
 
 
 const Usuarios = () => {
@@ -26,14 +28,15 @@ const Usuarios = () => {
             <div className="flex flex-col items-center">
                 <h1 className="bg-paleta5 bg-opacity-50 text-4xl m-5 p-5 text-paleta6">
                     Área de Administración de Usuarios
-                </h1>
-                {/* <PrivateComponent roleList={['admin']}>
+                </h1>                
+                <PrivateComponent roleList={['admin']}>
         <button className='bg-red-400'>Hola RBAC</button>
-      </PrivateComponent> */}
+      </PrivateComponent>
                 <div className='bg-white px-6 py-3 shadow-2xl'>
                     <div>
                         <h2 className='text-3xl text-center p-5 text-principal '>Listado de Usuarios</h2>
                     </div>
+                  
                     <table className='tabla'>
                         <thead>
                             <tr>
@@ -83,6 +86,7 @@ const Usuarios = () => {
                     }
                 );
         };
+        //este codigo sirve para que el en la base de datos directamente cambie el estado del usuario
             if (user.rol !== rol) {
                 editUsuario();
         }

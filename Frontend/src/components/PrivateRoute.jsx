@@ -2,10 +2,12 @@ import React ,{useEffect} from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from 'react-router-dom';
 import { obtenerDatosUsuario } from '../utils/apis/Usuarios';
+import { useUser } from '../context/userContext';
 
 
 const Profile = ({ children }) => {
     const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+    const {setUserData} = useUser();
 // este codigo me trae el token desde auth0
 useEffect(() => {
     const fetchAuth0Token = async () => {
@@ -18,7 +20,8 @@ useEffect(() => {
 
     await obtenerDatosUsuario(
         (Response) => {
-            console.log('respose', Response);
+            console.log('respose con datos de usuario', Response);
+            setUserData(Response.data);
         },
         (err) =>{
             console.log('err',err);

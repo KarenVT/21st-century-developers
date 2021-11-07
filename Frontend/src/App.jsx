@@ -12,8 +12,11 @@ import Productos from './pages/Admin/Productos/Productos';
 import Roles from './pages/Admin/Roles/Roles';
 import { Auth0Provider } from "@auth0/auth0-react";
 import Usuarios from './pages/Admin/Usuarios/Usuarios';
+import { UserContext } from './context/userContext';
+import { useState } from 'react';
 
 function App() {
+  const [userData,setUserData] = useState({});
   return (
     <Auth0Provider
      domain="misiontic-modaexpress.us.auth0.com"
@@ -21,6 +24,8 @@ function App() {
     // aqui se agrega la audiencia para poder pedir el token
     audience="api-autenticacion"
     >
+    <div className="app">
+    <UserContext.Provider value = {{userData,setUserData}}>
     <Router>
       <Switch>
         <Route path={['/Admin', '/Admin/Ventas', '/Admin/Productos','/Roles','/Admin/Usuarios']}>
@@ -70,6 +75,9 @@ function App() {
         </Route>
       </Switch>
     </Router>
+    </UserContext.Provider>
+    </div>
+   
     </Auth0Provider>
   );
 }
