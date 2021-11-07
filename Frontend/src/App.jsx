@@ -14,6 +14,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import Usuarios from './pages/Admin/Usuarios/Usuarios';
 import { UserContext } from './context/userContext';
 import { useState } from 'react';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const [userData,setUserData] = useState({});
@@ -23,6 +24,7 @@ function App() {
     clientId="lBgjMzJEBs4GZS9XP7FQ27iJw7kYDe4j"
     // aqui se agrega la audiencia para poder pedir el token
     audience="api-autenticacion"
+    redirectUri={window.location.origin}
     >
     <div className="app">
     <UserContext.Provider value = {{userData,setUserData}}>
@@ -36,16 +38,22 @@ function App() {
               </Route>
 
               <Route path='/Admin/Productos'>
+              {/* poner una ruta privada */}
+              <PrivateRoute roleList={["admin"]}>
                 <Productos />
+                </PrivateRoute>
               </Route>
 
               <Route path='/Admin/Ventas'>
                 <Ventas />
               </Route>
               <Route path='/Admin/Usuarios'>
+                 {/* poner una ruta privada */}
+                 <PrivateRoute roleList={["admin"]}>
                 <Usuarios />
+                </PrivateRoute>
               </Route>
-              <Route path='/Admin'>
+              <Route path='/Admin'>            
                 <Admin />
               </Route>
 
