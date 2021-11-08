@@ -6,6 +6,7 @@ const Admin = () => {
         <div className=" h-full flex justify-around items-center">
             <div className="img flex flex-col ">
                 <Link to="/admin/Productos">
+                
                     <button className=" bg-opacity-80  items-center text-white  text-3xl  bg-principal p-2 w-full hover:bg-principal  hover:bg-opacity-50">Administración productos</button>
                 </Link>
             </div>
@@ -15,7 +16,7 @@ const Admin = () => {
                 </Link>
                 
             </div>
-            <div className=" ">
+            <div className="img3 flex-col w-full h-full ">
                 <Link to="/Admin/Usuarios">
                     <button className="bg-opacity-80  items-center text-white  text-3xl  bg-principal p-2 w-full hover:bg-principal hover:bg-opacity-50">Administración Usuarios</button>
                 </Link>

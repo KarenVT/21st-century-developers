@@ -1,34 +1,103 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PrivateRoute from "../components/PrivateRoute";
 import { useAuth0 } from "@auth0/auth0-react";
+import ReactLoading from 'react-loading';
+import { obtenerDatosUsuario } from '../utils/apis/Usuarios';
+import { useUser } from '../context/userContext';
+
 
 
 const PrivateLayaut = ({ children }) => {
+    const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently, logout } =
+    useAuth0();
+  const [loadingUserInformation, setLoadingUserInformation] = useState(false);
+  const { setUserData } = useUser();
+  
+  useEffect(() => {
+    const fetchAuth0Token = async () => {
 
-    const { user, isAuthenticated, isLoading, getAccessTokenSilently  } = useAuth0();
-// // este codigo me trae el token desde auth0
-//    useEffect(() => {
-//     const fetchAuth0Token = async () => {
-//        const accessToken = await getAccessTokenSilently({
-//           audience: `api-autenticacion`,
-//     });
-//     console.log(accessToken);
-//     };       
 
-//     fetchAuth0Token();
-//    }, []);
-// // hasta este punto va el codigo de llamar el token
-    return (
-        <PrivateRoute>
-        <div className="flex flex-col justify-between h-screen">
-        <Navbar/>
-            <main className="h-full overflow-y-scroll">{children}</main>
-            <Footer/>
-        </div>
-        </PrivateRoute>
-    );
+        // 1.
+        setLoadingUserInformation(true);
+      const accessToken = await getAccessTokenSilently({
+        audience: `api-autenticacion`,
+      });
+      // 2.
+      localStorage.setItem('token', accessToken);
+      console.log(accessToken);
+        // 3. 
+        await obtenerDatosUsuario(
+        (response) => {
+          console.log('response con datos del usuario', response);
+          setUserData(response.data);
+          setLoadingUserInformation(false);
+        },
+        (err) => {
+          console.log('err', err);
+          setLoadingUserInformation(false);
+          logout({ returnTo: 'http://localhost:3000/admin' });
+        }
+      );
+    };
+    if (isAuthenticated) {
+      fetchAuth0Token();
+    }
+  }, [isAuthenticated, getAccessTokenSilently, logout, setUserData]);
+
+  if (isLoading || loadingUserInformation)
+    return <ReactLoading className="flex justify-end items-end" type='spinningBubbles' color='#231942' height={500} width={300} />;
+
+  if (!isAuthenticated) {
+    return loginWithRedirect();
+  }
+  return (
+    <div className='flex w-screen h-screen'>
+      <div className='flex flex-col w-full'>
+        <Navbar />
+        {/* <SidebarResponsive /> */}
+        <main className='flex w-full  overflow-y-scroll items-center justify-center'>
+          {children}
+        </main>
+      </div>
+    </div>
+  );
 };
 
 export default PrivateLayaut;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     const { user, isAuthenticated, isLoading, getAccessTokenSilently  } = useAuth0();
+//     return (
+//         <PrivateRoute>
+//         <div className="flex flex-col justify-between h-screen">
+//         <Navbar/>   
+//             <main className="h-full overflow-y-scroll">{children}</main>
+//             <Footer/>
+//         </div>
+//         </PrivateRoute>
+//     );
+// };
+
+// export default PrivateLayaut;

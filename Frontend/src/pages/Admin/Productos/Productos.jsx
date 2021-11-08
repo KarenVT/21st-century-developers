@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import { getProductos, postProductos, patchProductos, deleteProductos } from '../../../utils/apis/Productos';
+import PrivateComponent from '../../../components/PrivateComponent';
+
 
 const Productos = () => {
     const [mostrarLista, setMostrarLista] = useState(true);
@@ -156,9 +158,11 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                 </div>
                 <div className="flex justify-center ">
                     <div className="w-3/12 px-2">
+                   
                         <button type="submit" className="boton w-full">
                             Registrar
                         </button>
+                        
                     </div>
                     <div className="w-3/12 px-2">
                         <button
@@ -207,6 +211,7 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, mo
                             placeholder='Burcar Producto'
                         />
                     </div>
+                    
                     <div className="w-2/6">
                         <button
                             onClick={() => {
@@ -216,6 +221,7 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, mo
                         > Registrar Producto
                         </button>
                     </div>
+                   
                 </div>
                 
                 <table className='tabla'>
@@ -224,9 +230,11 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, mo
                             <th>Id Producto</th>
                             <th>Nombre Producto</th>
                             <th>Descripción</th>
-                            <th>Precio Unitario</th>
+                            <th>Pre cio Unitario</th>
                             <th>Estado</th>
+                            <PrivateComponent roleList ={["admin"]}>
                             <th >Acciones</th>
+                            </PrivateComponent>
                         </tr>
                     </thead>
                     <tbody>
@@ -347,7 +355,8 @@ const EditarProducto = ({ productos, setActualizarDatos }) => {
                     </>
                 )
             }
-
+                <PrivateComponent roleList ={["admin"]}>
+                    
             <td className="bg-paleta3">
                 <div className="flex w-full justify-around ">
                     {
@@ -366,6 +375,7 @@ const EditarProducto = ({ productos, setActualizarDatos }) => {
                     <i onClick={() => { eliminarProducto() }} className="fas fa-trash" />
                 </div>
             </td>
+                </PrivateComponent>
         </tr>
     );
 

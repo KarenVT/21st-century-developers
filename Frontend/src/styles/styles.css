@@ -57,3 +57,10 @@ body {
   height: 200px;
   width: 400px;
 }
+
+.img3 {
+  background: url(/src/media/usuarios.png);
+  background-size: cover;
+  height: 200px;
+  width: 400px;
+}

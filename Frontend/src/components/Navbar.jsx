@@ -4,6 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 
+
 const Navbar = () => {
 
     const { loginWithRedirect } = useAuth0();
@@ -53,12 +54,13 @@ const Navbar = () => {
 
                                 </i>
 
-                                <Link to="../Admin/ " className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Admin</Link>
 
 
-                                <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">Projects</i>
+                                <Link to="/Admin/Ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Ventas</Link>
 
-                                <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">Calendar</i>
+                                <Link to="/Admin/Productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Productos</Link>
+
+                                <Link to="/Admin/Usuarios" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Usuarios</Link>
 
                                 <i id="boton" type="button" className="bg-principal text-white hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">
                                     <button onClick={() => cerrarsesion()}
@@ -83,11 +85,11 @@ const Navbar = () => {
                             >Iniciar Sesión</button>
 
                         </i>
-                        <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Team</i>
+                        <Link to="/Admin/Ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Ventas</Link>
 
-                        <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Projects</i>
+                        <Link to="/Admin/Productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Productos</Link>
 
-                        <i href="#" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Calendar</i>
+                        <Link to="/Admin/Usuarios" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Usuarios</Link>
 
                         <i id="boton" type="button" className="bg-principal text-white hover:bg-paleta3 hover:bg-opacity-40 px-3 py-2 rounded-md text-sm font-medium">
                             <button onClick={() => logout({ returnTo: window.location.origin })}

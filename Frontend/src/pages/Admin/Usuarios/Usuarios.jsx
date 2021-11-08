@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { getUsuarios, patchUsuarios, } from '../../../utils/apis/Usuarios';
+import { getUsuarios, patchUsuarios, deleteUsuarios } from '../../../utils/apis/Usuarios';
 import { nanoid } from 'nanoid';
+import PrivateComponent from "../../../components/PrivateComponent";
 
 
-const Usuarios = () => {
+
+const Usuarios = ({rol}) => {
     const [usuarios, setUsuarios] = useState([]);
+    const [ActualizarDatos, setActualizarDatos] = useState(true);
 
     useEffect(() => {
         const fetchUsuarios = async () => {
@@ -12,14 +15,18 @@ const Usuarios = () => {
                 (respuesta) => {
                     console.log('usuarios', respuesta.data);
                     setUsuarios(respuesta.data);
+                    setActualizarDatos(false);
                 },
                 (err) => {
                     console.log(err);
                 }
             );
         };
-        fetchUsuarios();
-    }, []);
+        if (ActualizarDatos) {
+            fetchUsuarios();
+        }
+    }, [ActualizarDatos]);
+
 
     return (
         <div className="flex h-auto w-full flex-col items-center justify-start p-10">
@@ -27,13 +34,11 @@ const Usuarios = () => {
                 <h1 className="bg-paleta5 bg-opacity-50 text-4xl m-5 p-5 text-paleta6">
                     Área de Administración de Usuarios
                 </h1>
-                {/* <PrivateComponent roleList={['admin']}>
-        <button className='bg-red-400'>Hola RBAC</button>
-      </PrivateComponent> */}
                 <div className='bg-white px-6 py-3 shadow-2xl'>
                     <div>
                         <h2 className='text-3xl text-center p-5 text-principal '>Listado de Usuarios</h2>
                     </div>
+
                     <table className='tabla'>
                         <thead>
                             <tr>
@@ -60,83 +65,86 @@ const Usuarios = () => {
                             })}
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
+        </div>
 
-            );
+    );
 };
 
-            const RolesUsuario = ({user}) => {
+const RolesUsuario = ({ user }) => {
     const [rol, setRol] = useState(user.rol);
 
     useEffect(() => {
         const editUsuario = async () => {
-                await patchUsuarios(
-                    user._id,
-                    { rol },
-                    (res) => {
-                        console.log(res);
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
+            await patchUsuarios(
+                user._id,
+                { rol },
+                (res) => {
+                    console.log(res);
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
         };
-            if (user.rol !== rol) {
-                editUsuario();
+        //este codigo sirve para que el en la base de datos directamente cambie el estado del usuario
+        if (user.rol !== rol) {
+            editUsuario();
         }
     }, [rol, user]);
 
-            return (
-            <select className='input' value={rol} onChange={(e) => setRol(e.target.value)}>
-                <option value='' disabled>
-                    Seleccione un rol
-                </option>
-                <option value='admin'>Admin</option>
-                <option value='vendedor'>Vendedor</option>
-                <option value='sin rol'>Sin rol</option>
-            </select>
-            );
+    
+
+    return (
+        <select className='input' value={rol} onChange={(e) => setRol(e.target.value)}>
+            <option value='' disabled>
+                Seleccione un rol
+            </option>
+            <option value='admin'>Admin</option>
+            <option value='vendedor'>Vendedor</option>
+            <option value='sin rol'>Sin rol</option>
+        </select>
+    );
 };
 
-            const EstadoUsuario = ({user}) => {
+const EstadoUsuario = ({ user }) => {
     const [estado, setEstado] = useState(user.estado ?? '');
 
     useEffect(() => {
         const editUsuario = async () => {
-                await patchUsuarios(
-                    user._id,
-                    { estado },
-                    (res) => {
-                        console.log(res);
-                    },
-                    (err) => {
-                        console.error(err);
-                    }
-                );
+            await patchUsuarios(
+                user._id,
+                { estado },
+                (res) => {
+                    console.log(res);
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
         };
-            if (user.estado !== estado) {
-                editUsuario();
+        if (user.estado !== estado) {
+            editUsuario();
         }
     }, [estado, user]);
 
-            return (
-            <select className='input' value={estado} onChange={(e) => setEstado(e.target.value)}>
-                <option value='' disabled>
-                    Seleccione un estado
-                </option>
-                <option value='autorizado' className='text-principal'>
-                    Autorizado
-                </option>
-                <option value='pendiente' className='text-principal'>
-                    Pendiente
-                </option>
-                <option value='rechazado' className='text-principal'>
-                    Rechazado
-                </option>
-            </select>
-            );
+    return (
+        <select className='input' value={estado} onChange={(e) => setEstado(e.target.value)}>
+            <option value='' disabled>
+                Seleccione un estado
+            </option>
+            <option value='autorizado' className='text-principal'>
+                Autorizado
+            </option>
+            <option value='pendiente' className='text-principal'>
+                Pendiente
+            </option>
+            <option value='rechazado' className='text-principal'>
+                Rechazado
+            </option>
+        </select>
+    );
 };
 
-            export default Usuarios;
+export default Usuarios;
