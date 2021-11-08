@@ -59,7 +59,8 @@ const Usuarios = ({rol}) => {
                                         </td>
                                         <td>
                                             <RolesUsuario user={user} />
-                                        </td>
+                                        </td>   
+
                                     </tr>
                                 );
                             })}
@@ -107,7 +108,7 @@ const RolesUsuario = ({ user }) => {
         </select>
     );
 };
-
+//estados de usuario
 const EstadoUsuario = ({ user }) => {
     const [estado, setEstado] = useState(user.estado ?? '');
 
@@ -146,5 +147,4 @@ const EstadoUsuario = ({ user }) => {
         </select>
     );
 };
-
 export default Usuarios;
