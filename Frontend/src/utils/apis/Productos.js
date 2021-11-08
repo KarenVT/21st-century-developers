@@ -36,10 +36,6 @@ export const patchProductos = async (id, data, successCallback, errorCallback) =
         Authorization: getToken(),
           },
         data,
-       
-            
-          
-
     };
     await axios.request(options).then(successCallback).catch(errorCallback);
 };
