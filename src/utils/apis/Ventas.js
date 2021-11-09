@@ -2,6 +2,7 @@ import axios from "axios";
 import { urlFija } from "./Productos";
 
 
+
 const getToken = () => {
     return `Bearer ${localStorage.getItem("token")}`;
 };

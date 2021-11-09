@@ -10,7 +10,7 @@ const getToken = () => {
 export const getUsuarios = async (successCallback, errorCallback) => {
   const options = {
     method: 'GET',
-    url: `${urlFija}/usuarios`,
+    url: `${urlFija}/usuarios/`,
     headers: {
       Authorization: getToken(),
     },
