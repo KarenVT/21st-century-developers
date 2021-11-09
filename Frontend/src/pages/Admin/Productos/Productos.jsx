@@ -158,11 +158,11 @@ const RegisProductos = ({ setMostrarLista, mostrarLista, setActualizarDatos, }) 
                 </div>
                 <div className="flex justify-center ">
                     <div className="w-3/12 px-2">
-                   
+
                         <button type="submit" className="boton w-full">
                             Registrar
                         </button>
-                        
+
                     </div>
                     <div className="w-3/12 px-2">
                         <button
@@ -202,7 +202,7 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, mo
                 </div>
                 <div className='flex justify-around items-center'>
 
-                    <div >
+                    <div>
                         <input
                             value={buscador}
                             onChange={(e) => setBuscador(e.target.value)}
@@ -211,7 +211,7 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, mo
                             placeholder='Burcar Producto'
                         />
                     </div>
-                    
+
                     <div className="w-2/6">
                         <button
                             onClick={() => {
@@ -221,19 +221,19 @@ const ListProductos = ({ listaProductos, setActualizarDatos, setMostrarLista, mo
                         > Registrar Producto
                         </button>
                     </div>
-                   
+
                 </div>
-                
+
                 <table className='tabla'>
                     <thead>
                         <tr>
                             <th>Id Producto</th>
                             <th>Nombre Producto</th>
                             <th>Descripción</th>
-                            <th>Pre cio Unitario</th>
+                            <th>Precio Unitario</th>
                             <th>Estado</th>
-                            <PrivateComponent roleList ={["admin"]}>
-                            <th >Acciones</th>
+                            <PrivateComponent roleList={["admin"]}>
+                                <th >Acciones</th>
                             </PrivateComponent>
                         </tr>
                     </thead>
@@ -266,7 +266,6 @@ const EditarProducto = ({ productos, setActualizarDatos }) => {
 
     const editarProducto = async () => {
         // Patch - editar datos - Enviar al Backend
-
         await patchProductos(productos._id,
             {
                 idProducto: datosProductoEditado.idProducto,
@@ -288,7 +287,6 @@ const EditarProducto = ({ productos, setActualizarDatos }) => {
     }
 
     const eliminarProducto = async () => {
-
         await deleteProductos(
             productos._id,
             (response) => {
@@ -301,7 +299,6 @@ const EditarProducto = ({ productos, setActualizarDatos }) => {
         );
 
     }
-
     return (
         <tr>
             {
@@ -355,27 +352,35 @@ const EditarProducto = ({ productos, setActualizarDatos }) => {
                     </>
                 )
             }
-                <PrivateComponent roleList ={["admin"]}>
-                    
-            <td className="bg-paleta3">
-                <div className="flex w-full justify-around ">
-                    {
-                        editar ? (
-                            <i
-                                onClick={() => { editarProducto() }}
-                                className="fas fa-check-square" />
+            <PrivateComponent roleList={["admin"]}>
+                <td className="bg-paleta3">
+                    <div className="flex w-full justify-around ">
+                        {
+                            editar ? (
+                                <>
+                                    <i
+                                        onClick={() => { editarProducto() }}
+                                        className="fas fa-check-square text-green-700 hover:text-green-900"
+                                    />
+                                    <i
+                                        onClick={() => setEditar(!editar)}
+                                        className='fas fa-ban text-red-700 hover:text-red-900'
+                                    />
 
-                        ) : (
-                            <i
-                                onClick={() => { setEditar(!editar) }}
-                                className="fas fa-edit" />
-                        )
-                    }
+                                </>
 
-                    <i onClick={() => { eliminarProducto() }} className="fas fa-trash" />
-                </div>
-            </td>
-                </PrivateComponent>
+                            ) : (
+                                <>
+                                    <i
+                                        onClick={() => { setEditar(!editar) }}
+                                        className="fas fa-edit text-paleta6 hover:text-blue-700" />
+                                    <i onClick={() => { eliminarProducto() }} className="fas fa-trash text-paleta6 hover:text-red-600" />
+                                </>
+                            )
+                        }
+                    </div>
+                </td>
+            </PrivateComponent>
         </tr>
     );
 

@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { getVentas, postVentas, patchVentas, deleteVentas, } from '../../../utils/apis/Ventas';
 import { getUsuarios } from '../../../utils/apis/Usuarios';
 import { getProductos } from '../../../utils/apis/Productos';
+import PrivateComponent from '../../../components/PrivateComponent';
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 
@@ -116,24 +117,25 @@ const Ventas = () => {
 
     return (
         <div className="flex h-auto w-full flex-col items-center justify-start p-10">
-            {mostrarLista ? (
-                <ListVentas
-                    listaVentas={ventas}
-                    // setActualizarDatos={setActualizarDatos} 
-                    setMostrarLista={setMostrarLista}
-                    productos={productos}
-                    vendedores={vendedores}
-                    listaProductos={productos}
-                    listaVendedores={vendedores}
-                    ventas={ventas}
+            <div className="flex flex-col items-center">
+                <h1 className="bg-paleta5 bg-opacity-50 text-4xl m-5 p-5 text-paleta6">
+                    Área de Administración de Ventas
+                </h1>
+                {mostrarLista ? (
+                    <ListVentas
+                        listaVentas={ventas}
+                        setActualizarDatos={setActualizarDatos}
+                        setMostrarLista={setMostrarLista}
+                        productos={productos}
+                        vendedores={vendedores}
+                        listaProductos={productos}
+                        listaVendedores={vendedores}
+                        ventas={ventas}
 
-                />
-            ) : (
-                <div className="flex h-auto w-full flex-col items-center justify-start p-10">
-                    <div className="flex flex-col items-center">
-                        <h1 className="bg-paleta5 bg-opacity-50 text-4xl m-5 p-5 text-paleta6">
-                            Área de Administración de Ventas
-                        </h1>
+                    />
+                ) : (
+                    <div className="flex h-auto w-full flex-col items-center justify-start p-10">
+
                         <form ref={form} onSubmit={submitForm} className=" bg-white px-6 py-3 shadow-2xl">
                             <div>
                                 <h2 className="text-3xl text-center p-5 text-principal ">Registro de Ventas</h2>
@@ -163,8 +165,6 @@ const Ventas = () => {
                                         name="fecha"
                                         required
                                     />
-
-
                                 </div>
                                 <div className="w-1/3">
                                     <label className="pl-3" htmlFor="idCliente">Id Cliente</label>
@@ -224,14 +224,14 @@ const Ventas = () => {
                             </div>
                         </form>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 
 };
 
-// elegir más de un producto
+// elegir un producto
 const ListProductos = ({ productos, setProductos, setListaTabla }) => {
     const [agregarProducto, setAgregarProducto] = useState({});
     const [agregarFila, setAgregarFila] = useState([]);
@@ -271,7 +271,7 @@ const ListProductos = ({ productos, setProductos, setListaTabla }) => {
 
     return (
         <div>
-            <div className="w-1/2 justify-center">
+            <div className="w-2/3 justify-center">
                 <label className="pl-3 " htmlFor="nombreProducto">Nombre Producto</label>
                 <div className="inline-flex w-full">
                     <select
@@ -291,14 +291,15 @@ const ListProductos = ({ productos, setProductos, setListaTabla }) => {
                         })}
                     </select>
                     <button
-                        onClick={() => {
-                            otroProducto()
-
-                        }
+                        onClick={() => { otroProducto() }
                         }>
                         <i className="fas fa-plus px-2 py-3"></i>
                     </button>
+                    <div className="w-full py-1">
+                        <span className=" border-b-2 text-xl border-principal text-principal">Ingrese solo un Producto</span>
+                    </div>
                 </div>
+
             </div>
 
 
@@ -311,7 +312,7 @@ const ListProductos = ({ productos, setProductos, setListaTabla }) => {
                         <th>Precio Unitario</th>
                         <th>Cantidad</th>
                         <th>Total Venta</th>
-                        <th>Accion</th>
+                        <th >Acciones</th>
                         <th className="hidden">Input</th>
                         <th></th>
                     </tr>
@@ -430,7 +431,9 @@ const ListVentas = ({ listaVentas, setActualizarDatos, setMostrarLista, mostrarL
                                 <th>Precio Unitario</th>
                                 <th>Cantidad Venta</th>
                                 <th>Total Venta</th>
-                                <th >Acciones</th>
+                                <PrivateComponent roleList={["admin", "vendedor"]}>
+                                    <th >Acciones</th>
+                                </PrivateComponent>
                             </tr>
                         </thead>
                         <tbody>
@@ -452,11 +455,11 @@ const ListVentas = ({ listaVentas, setActualizarDatos, setMostrarLista, mostrarL
 };
 
 
-const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores, listaVentas}) => {
+const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores, listaVentas }) => {
     const [total, setTotal] = useState([]);
     const [editar, setEditar] = useState(false);
     const [datosVentasEditadas, setDatosVentasEditadas] = useState({
-        
+
         _id: ventas._id,
         id: ventas.id,
         fecha: ventas.fecha,
@@ -469,14 +472,14 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
         precioUnitario: ventas.nombreProducto[0].precioUnitario,
         totalVenta: ventas.nombreProducto[0].totalVenta
     });
-    
-    
-    
 
 
-        
-        console.log('elo', datosVentasEditadas);
-    
+
+
+
+
+    console.log('elo', datosVentasEditadas);
+
     const editarProducto = async () => {
         // Patch - editar datos - Enviar al Backend
         await patchVentas(ventas._id,
@@ -486,7 +489,7 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                 idCliente: datosVentasEditadas.idCliente,
                 nombreCliente: datosVentasEditadas.nombreCliente,
                 nombreVendedor: vendedores.filter((v) => v._id === datosVentasEditadas.nombreVendedor)[0],
-                
+
                 nombreProducto: [
                     {
                         "idProducto": datosVentasEditadas.idProducto,
@@ -496,7 +499,7 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                         "totalVenta": datosVentasEditadas.totalVenta
                     }
                 ],
-              
+
             },
             (response) => {
                 console.log(response.data);
@@ -565,7 +568,6 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                                 className="input"
                                 type="text"
                                 name="nombreVendedor"
-                                defaultValue=""
                                 value={datosVentasEditadas.nombreVendedor}
                                 onChange={(e) => setDatosVentasEditadas({ ...datosVentasEditadas, nombreVendedor: e.target.value })}
                             >
@@ -574,7 +576,7 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                                 </option>
                                 {vendedores.map((e) => {
                                     return (
-                                        <option key={nanoid()} value={e._id}>{`${e.name}`}</option>
+                                        <option key={nanoid()}>{`${e.name}`}</option>
                                     );
                                 })}
                             </select>
@@ -640,33 +642,37 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                     </>
                 )
             }
-            <td className="bg-paleta3">
-                <div className="flex w-full justify-around ">
-                    {
-                        editar ? (
-                            <>
-                                <i
-                                    onClick={() => { editarProducto() }}
-                                    className="fas fa-check-square text-green-700 hover:text-green-900"
-                                />
-                                <i
-                                    onClick={() => setEditar(!editar)}
-                                    className='fas fa-ban text-red-700 hover:text-red-900'
-                                />
 
-                            </>
+            <PrivateComponent roleList={["admin", "vendedor"]}>
 
-                        ) : (
-                            <>
-                                <i
-                                    onClick={() => { setEditar(!editar) }}
-                                    className="fas fa-edit text-paleta6 hover:text-blue-700" />
-                                <i onClick={() => { eliminarVenta() }} className="fas fa-trash text-paleta6 hover:text-red-600" />
-                            </>
-                        )
-                    }
-                </div>
-            </td>
+                <td className="bg-paleta3">
+                    <div className="flex w-full justify-around ">
+                        {
+                            editar ? (
+                                <>
+                                    <i
+                                        onClick={() => { editarProducto() }}
+                                        className="fas fa-check-square text-green-700 hover:text-green-900"
+                                    />
+                                    <i
+                                        onClick={() => setEditar(!editar)}
+                                        className='fas fa-ban text-red-700 hover:text-red-900'
+                                    />
+
+                                </>
+
+                            ) : (
+                                <>
+                                    <i
+                                        onClick={() => { setEditar(!editar) }}
+                                        className="fas fa-edit text-paleta6 hover:text-blue-700" />
+                                    <i onClick={() => { eliminarVenta() }} className="fas fa-trash text-paleta6 hover:text-red-600" />
+                                </>
+                            )
+                        }
+                    </div>
+                </td>
+            </PrivateComponent>
         </tr>
     );
 }
