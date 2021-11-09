@@ -66,6 +66,33 @@ const Usuarios = ({ rol }) => {
                             </tbody>
                         </table>
                     </div>
+                    <table className='tabla'>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Estado</th>
+                                <th>Rol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {usuarios.map((user) => {
+                                return (
+                                    <tr key={nanoid()}>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td>
+                                            <EstadoUsuario user={user} />
+                                        </td>
+                                        <td>
+                                            <RolesUsuario user={user} />
+                                        </td>   
+
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -107,7 +134,7 @@ const RolesUsuario = ({ user }) => {
         </select>
     );
 };
-
+//estados de usuario
 const EstadoUsuario = ({ user }) => {
     const [estado, setEstado] = useState(user.estado ?? '');
 
@@ -146,5 +173,4 @@ const EstadoUsuario = ({ user }) => {
         </select>
     );
 };
-
 export default Usuarios;
