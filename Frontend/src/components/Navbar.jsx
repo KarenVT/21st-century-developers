@@ -41,8 +41,9 @@ const Navbar = () => {
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                         {/*  */}
 
-                        <div className="flex-shrink-0 flex items-center">
-                            <Link to="/Home/Index" className="text-2xl text-principal" htmlFor="">Moda Express</Link>
+                        <div className="flex items-center">
+                            <Link to="/Home/Index" className="text-2xl text-principal" >Moda Express
+                            </Link>
                         </div>
                         <div className="hidden sm:block sm:ml-6">
                             <div className="flex space-x-4">
@@ -71,14 +72,14 @@ const Navbar = () => {
                                     >
                                         <span className="sr-only">Abrir Perfil</span>
                                         <>
-                                            <img src={user.picture} className='h-10 w-10 rounded-full' />
+                                            <img src={user.picture} className='h-10 w-10 rounded-full' alt="imagen de su cuenta de perfil" />
                                         </>
                                     </button>
 
                                     {mostrarPerfil && (
                                         <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" >
 
-                                        <i to="/Admin/Usuarios" className="block m-2 px-4 py-2 text-principal bg-paleta3 bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">{user.name}</i>
+                                            <i to="/Admin/Usuarios" className="block m-2 px-4 py-2 text-principal bg-paleta3 bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">{user.name}</i>
 
                                             <Link to="/Admin/Usuarios" className="block m-2 px-4 py-2 text-principal hover:bg-paleta3 hover:bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">Usuarios</Link>
 

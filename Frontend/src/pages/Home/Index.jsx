@@ -4,8 +4,13 @@ const Index = () => {
     return (
         <div className="h-full flex flex-col w-full justify-center items-center">
             <section className="  text-paleta6 bg-paleta5 bg-opacity-50 p-5 h-auto rounded-md">
+                <div  className="flex justify-center items-center">
+
+                    <img src="https://cdn-user-icons.flaticon.com/15843/15843627/1636474583909.svg?token=exp=1636475486~hmac=aab984036a11e82b96470ed95157fb2b" alt="logo de la Empresa" className="w-2/5 h-2/5" />
+                </div>
                 <h1 className="m-4 text-center text-6xl text-paleta6">Moda Express
                 </h1>
+
                 <p className=" text-black text-center text-3xl">Administrador de Ventas y Productos</p>
             </section>
         </div>

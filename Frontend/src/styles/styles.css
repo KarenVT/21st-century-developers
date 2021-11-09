@@ -14,6 +14,9 @@ body {
 .input {
   @apply rounded-full h-10 px-2 border border-gray-400 w-full focus:outline-none focus:border-transparent focus:ring focus:ring-principal shadow-lg;
 }
+.input2 {
+  @apply rounded-full h-10 px-2 border border-gray-400 mx-0 focus:outline-none focus:border-transparent focus:ring focus:ring-principal shadow-lg;
+}
 
 .boton {
   @apply rounded-full h-10 px-2 bg-principal text-white shadow-lg hover:bg-paleta3 hover:bg-opacity-40 hover:text-principal;
@@ -28,6 +31,7 @@ body {
   padding: 15px;
   margin: 5px;
   text-align: center;
+  width: auto;
 }
 
 .tabla th {
@@ -63,4 +67,7 @@ body {
   background-size: cover;
   height: 200px;
   width: 400px;
+}
+.img4 {
+  background: url(https://cdn-user-icons.flaticon.com/15843/15843627/1636472968921.svg?token=exp=1636473907~hmac=3eb3e6afd6dfa6a4285ec3eb33b875f5);
 }

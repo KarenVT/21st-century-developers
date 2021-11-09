@@ -1,7 +1,7 @@
 import axios from "axios";
 //esta es la constante para llamar el token
 const getToken =() => {
-    return `bearer ${localStorage.getItem("token")}`;
+    return `Bearer ${localStorage.getItem("token")}`;
 };
 
 export const getProductos = async (successCallback, errorCallback) => {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getToken = () => {
-    return `bearer ${localStorage.getItem("token")}`;
+    return `Bearer ${localStorage.getItem("token")}`;
 };
 
 //CRUD DE VENTAS

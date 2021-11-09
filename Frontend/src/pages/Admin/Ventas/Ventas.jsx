@@ -4,8 +4,8 @@ import { getVentas, postVentas, patchVentas, deleteVentas, } from '../../../util
 import { getUsuarios } from '../../../utils/apis/Usuarios';
 import { getProductos } from '../../../utils/apis/Productos';
 import PrivateComponent from '../../../components/PrivateComponent';
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const Ventas = () => {
     const [vendedores, setVendedores] = useState([]);
@@ -14,6 +14,7 @@ const Ventas = () => {
     const [mostrarLista, setMostrarLista] = useState(true);
     const [ventas, setVentas] = useState([]);
     const [ActualizarDatos, setActualizarDatos] = useState(true);
+    const { user } = useAuth0();
 
     const form = useRef(null);
 
@@ -67,10 +68,7 @@ const Ventas = () => {
             return null;
         })
             .filter((p) => p);
-        console.log("listaProdcutos", listaProductos);
 
-
-        console.log("listaProdcutos con ventas", listaProductos);
         const InfoVentas = {
             id: nuevaVenta.id,
             fecha: nuevaVenta.fecha,
@@ -114,6 +112,8 @@ const Ventas = () => {
             setActualizarDatos(true);
         }
     }, [mostrarLista]);
+
+
 
     return (
         <div className="flex h-auto w-full flex-col items-center justify-start p-10">
@@ -198,11 +198,19 @@ const Ventas = () => {
                                         <option value="" disabled>
                                             Seleccione un Vendedor
                                         </option>
-                                        {vendedores.map((e) => {
-                                            return (
-                                                <option key={nanoid()} value={e._id}>{`${e.name}`}</option>
-                                            );
-                                        })}
+                                        {
+                                            Object.values(vendedores).map((v) => {
+                                                if (v.rol !== "vendedor") {
+                                                    return (
+                                                        vendedores.filter((p) => p._id === vendedores[v.rol])[0]
+                                                    );
+                                                }
+                                                return (
+                                                    <option key={nanoid()} value={v._id}>{`${v.name}`}</option>
+                                                );
+                                            })
+
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -224,9 +232,10 @@ const Ventas = () => {
                             </div>
                         </form>
                     </div>
-                )}
-            </div>
-        </div>
+                )
+                }
+            </div >
+        </div >
     );
 
 };
@@ -284,11 +293,16 @@ const ListProductos = ({ productos, setProductos, setListaTabla }) => {
                         <option value="" disabled>
                             Seleccione un Producto
                         </option>
-                        {productos.map((e) => {
-                            return (
-                                <option key={nanoid()} value={e._id}>{`${e.nombreProducto}`}</option>
-                            );
-                        })}
+                        {Object.values(productos).map((v) => {
+                                    if (v.estado !== "Disponible") {
+                                        return (
+                                            productos.filter((p) => p._id === productos[v.estado])[0]
+                                        );
+                                    }
+                                    return (
+                                        <option key={nanoid()} value={v._id}>{`${v.nombreProducto}`}</option>
+                                    );
+                                })}
                     </select>
                     <button
                         onClick={() => { otroProducto() }
@@ -427,10 +441,10 @@ const ListVentas = ({ listaVentas, setActualizarDatos, setMostrarLista, mostrarL
                                 <th>Nombre Cliente</th>
                                 <th>Nombre Vendedor</th>
                                 <th>Id Producto</th>
-                                <th>Nombre Producto</th>
+                                <th>Producto</th>
                                 <th>Precio Unitario</th>
-                                <th>Cantidad Venta</th>
-                                <th>Total Venta</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
                                 <PrivateComponent roleList={["admin", "vendedor"]}>
                                     <th >Acciones</th>
                                 </PrivateComponent>
@@ -504,6 +518,7 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
             (response) => {
                 console.log(response.data);
                 setEditar(false);
+                setActualizarDatos(true)
             },
             (error) => {
                 console.error(error);
@@ -518,6 +533,7 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
             ventas._id,
             (response) => {
                 console.log(response.data);
+                setActualizarDatos(true)
 
             },
             (error) => {
@@ -544,12 +560,13 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                 // campos para editar los datos de Productos ya registrados
                 editar ? (
                     <>
-                        <td><input name='id' type="number" className='m-2 input'
+                        <td>
+                        <input name='id' type="number" className='mx-1 input'
                             value={datosVentasEditadas.id}
                             onChange={(e) => setDatosVentasEditadas({ ...datosVentasEditadas, id: e.target.value })}
                         />
                         </td>
-                        <td><input name='fecha' type="date" className='input'
+                        <td><input name='fecha' type="date" className=' input'
                             value={datosVentasEditadas.fecha}
                             onChange={(e) => setDatosVentasEditadas({ ...datosVentasEditadas, fecha: e.target.value })}
                         /></td>
@@ -574,9 +591,14 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                                 <option value="" disabled>
                                     Seleccione un Vendedor
                                 </option>
-                                {vendedores.map((e) => {
+                                {Object.values(vendedores).map((v) => {
+                                    if (v.rol !== "vendedor") {
+                                        return (
+                                            vendedores.filter((p) => p._id === vendedores[v.rol])[0]
+                                        );
+                                    }
                                     return (
-                                        <option key={nanoid()}>{`${e.name}`}</option>
+                                        <option key={nanoid()} value={v._id}>{`${v.name}`}</option>
                                     );
                                 })}
                             </select>
@@ -597,9 +619,14 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                                 <option value="" disabled>
                                     Seleccione un Producto
                                 </option>
-                                {productos.map((e) => {
+                                {Object.values(productos).map((v) => {
+                                    if (v.estado !== "Disponible") {
+                                        return (
+                                            productos.filter((p) => p._id === productos[v.estado])[0]
+                                        );
+                                    }
                                     return (
-                                        <option key={nanoid()}>{`${e.nombreProducto}`}</option>
+                                        <option key={nanoid()}>{`${v.nombreProducto}`}</option>
                                     );
                                 })}
                             </select>
@@ -608,7 +635,6 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                             value={datosVentasEditadas.precioUnitario}
                             onChange={(e) => setDatosVentasEditadas({ ...datosVentasEditadas, precioUnitario: e.target.value })}
                         /></td>
-
                         <td>
                             <input
                                 className="input"
@@ -644,7 +670,6 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
             }
 
             <PrivateComponent roleList={["admin", "vendedor"]}>
-
                 <td className="bg-paleta3">
                     <div className="flex w-full justify-around ">
                         {
@@ -658,9 +683,7 @@ const EditarVenta = ({ ventas, setActualizarDatos, productos, index, vendedores,
                                         onClick={() => setEditar(!editar)}
                                         className='fas fa-ban text-red-700 hover:text-red-900'
                                     />
-
                                 </>
-
                             ) : (
                                 <>
                                     <i

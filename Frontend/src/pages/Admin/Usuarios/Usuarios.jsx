@@ -55,10 +55,10 @@ const Usuarios = ({ rol }) => {
                                             <td>{user.name}</td>
                                             <td>{user.email}</td>
                                             <td>
-                                                <EstadoUsuario user={user} />
+                                                <EstadoUsuario user={user} setActualizarDatos={setActualizarDatos} />
                                             </td>
                                             <td>
-                                                <RolesUsuario user={user} />
+                                                <RolesUsuario user={user} setActualizarDatos={setActualizarDatos}  />
                                             </td>
                                         </tr>
                                     );
@@ -66,40 +66,14 @@ const Usuarios = ({ rol }) => {
                             </tbody>
                         </table>
                     </div>
-                    <table className='tabla'>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Estado</th>
-                                <th>Rol</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {usuarios.map((user) => {
-                                return (
-                                    <tr key={nanoid()}>
-                                        <td>{user.name}</td>
-                                        <td>{user.email}</td>
-                                        <td>
-                                            <EstadoUsuario user={user} />
-                                        </td>
-                                        <td>
-                                            <RolesUsuario user={user} />
-                                        </td>   
-
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+                   
                 </div>
             </div>
         </div>
     );
 };
 
-const RolesUsuario = ({ user }) => {
+const RolesUsuario = ({ user, setActualizarDatos }) => {
     const [rol, setRol] = useState(user.rol);
 
     useEffect(() => {
@@ -109,6 +83,7 @@ const RolesUsuario = ({ user }) => {
                 { rol },
                 (res) => {
                     console.log(res);
+                    setActualizarDatos(true)
                 },
                 (err) => {
                     console.error(err);
@@ -116,10 +91,10 @@ const RolesUsuario = ({ user }) => {
             );
         };
         //este codigo sirve para que el en la base de datos directamente cambie el estado del usuario
-        if (user.rol !== rol) {
+        if (user.rol !== rol ) {
             editUsuario();
         }
-    }, [rol, user]);
+    }, [rol, user, setActualizarDatos]);
 
 
 
@@ -135,7 +110,7 @@ const RolesUsuario = ({ user }) => {
     );
 };
 //estados de usuario
-const EstadoUsuario = ({ user }) => {
+const EstadoUsuario = ({ user, setActualizarDatos}) => {
     const [estado, setEstado] = useState(user.estado ?? '');
 
     useEffect(() => {
@@ -145,6 +120,7 @@ const EstadoUsuario = ({ user }) => {
                 { estado },
                 (res) => {
                     console.log(res);
+                    setActualizarDatos(true)
                 },
                 (err) => {
                     console.error(err);
@@ -154,7 +130,7 @@ const EstadoUsuario = ({ user }) => {
         if (user.estado !== estado) {
             editUsuario();
         }
-    }, [estado, user]);
+    }, [estado, user, setActualizarDatos]);
 
     return (
         <select className='input' value={estado} onChange={(e) => setEstado(e.target.value)}>

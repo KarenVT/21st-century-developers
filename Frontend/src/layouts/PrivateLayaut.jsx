@@ -1,7 +1,6 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import React, { useEffect, useState } from 'react';
-import PrivateRoute from "../components/PrivateRoute";
 import { useAuth0 } from "@auth0/auth0-react";
 import ReactLoading from 'react-loading';
 import { obtenerDatosUsuario } from '../utils/apis/Usuarios';
@@ -37,7 +36,8 @@ const PrivateLayaut = ({ children }) => {
         (err) => {
           console.log('err', err);
           setLoadingUserInformation(false);
-          logout({ returnTo: 'http://localhost:3000/admin' });
+          logout({ returnTo: window.location.origin });
+          
         }
       );
     };
