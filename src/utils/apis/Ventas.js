@@ -1,4 +1,6 @@
 import axios from "axios";
+import { urlFija } from "./Productos";
+
 
 const getToken = () => {
     return `Bearer ${localStorage.getItem("token")}`;
@@ -8,7 +10,7 @@ const getToken = () => {
 export const getVentas = async (successCallback, errorCallback) => {
     const options = {
         method: 'GET',
-        url: 'http://localhost:5000/ventas/',
+        url: `${urlFija}/ventas/`,
         headers: {
             Authorization: getToken(),
         },
@@ -21,7 +23,7 @@ export const postVentas = async (data, resCallBack, errorCallBack) => {
 
     const options = {
         method: 'POST',
-        url: 'http://localhost:5000/Ventas/',
+        url: `${urlFija}/Ventas/`,
         headers: {
             'Content-Type': 'application/json',
             Authorization: getToken(),
@@ -37,7 +39,7 @@ export const postVentas = async (data, resCallBack, errorCallBack) => {
 export const patchVentas = async (id, data, resCallBack, errorCallBack) => {
     const options = {
         method: 'PATCH',
-        url: `http://localhost:5000/ventas/${id}/`,
+        url: `${urlFija}/ventas/${id}/`,
         headers: {
             'Content-Type': 'application/json', Authorization: getToken()
         },
@@ -51,7 +53,7 @@ export const patchVentas = async (id, data, resCallBack, errorCallBack) => {
 export const deleteVentas = async (id, resCallBack, errorCallBack) => {
     const options = {
         method: 'DELETE',
-        url: `http://localhost:5000/ventas/${id}/`,
+        url: `${urlFija}/ventas/${id}/`,
         headers: {
             'Content-Type': 'application/json',
             Authorization: getToken()

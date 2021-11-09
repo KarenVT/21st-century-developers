@@ -1,4 +1,6 @@
 import axios from "axios";
+import { urlFija } from "./Productos";
+
 
 const getToken = () => {
   return `Bearer ${localStorage.getItem('token')}`;
@@ -8,7 +10,7 @@ const getToken = () => {
 export const getUsuarios = async (successCallback, errorCallback) => {
   const options = {
     method: 'GET',
-    url: 'http://localhost:5000/usuarios',
+    url: `${urlFija}/usuarios`,
     headers: {
       Authorization: getToken(),
     },
@@ -19,7 +21,7 @@ export const getUsuarios = async (successCallback, errorCallback) => {
 export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
   const options = {
     method: 'GET',
-    url: 'http://localhost:5000/usuarios/self',
+    url: `${urlFija}/usuarios/self`,
     headers: {
       Authorization: getToken(), // 3. enviarle el token a backend
     },
@@ -30,7 +32,7 @@ export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
 export const patchUsuarios = async (id, data, successCallback, errorCallback) => {
   const options = {
     method: 'PATCH',
-    url: `http://localhost:5000/usuarios/${id}/`,
+    url: `${urlFija}/usuarios/${id}/`,
     headers: { 'Content-Type': 'application/json', Authorization: getToken() },
     data,
   };
@@ -40,7 +42,7 @@ export const patchUsuarios = async (id, data, successCallback, errorCallback) =>
 export const deleteUsuarios = async (id, successCallback, errorCallback) => {
   const options = {
       method: 'DELETE',
-      url: `http://localhost:5000/usuarios/${id}/`,
+      url: `${urlFija}/usuarios/${id}/`,
       headers: { 'Content-Type': 'application/json',
       Authorization: getToken(),
   },

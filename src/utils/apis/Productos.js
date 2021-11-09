@@ -1,4 +1,9 @@
 import axios from "axios";
+
+// url con heroku
+// const urlFija = "http://localhost:5000" ------> servidor local
+export const urlFija = "https://radiant-temple-64052.herokuapp.com"
+
 //esta es la constante para llamar el token
 const getToken =() => {
     return `Bearer ${localStorage.getItem("token")}`;
@@ -7,7 +12,7 @@ const getToken =() => {
 export const getProductos = async (successCallback, errorCallback) => {
     const options = {
         method: 'GET',
-        url: 'http://localhost:5000/productos/',
+        url: `${urlFija}/productos/`,
         headers: {
             Authorization: getToken(),
           },
@@ -19,7 +24,7 @@ export const getProductos = async (successCallback, errorCallback) => {
 export const postProductos = async (data, successCallback, errorCallback) => {
     const options = {
         method: 'POST',
-        url: 'http://localhost:5000/productos/',
+        url: `${urlFija}/productos/`,
         headers: { 'Content-Type': 'application/json',
          Authorization: getToken(),
     },
@@ -31,7 +36,7 @@ export const postProductos = async (data, successCallback, errorCallback) => {
 export const patchProductos = async (id, data, successCallback, errorCallback) => {
     const options = {
         method: 'PATCH',
-        url: `http://localhost:5000/productos/${id}/`,
+        url: `${urlFija}/productos/${id}/`,
         headers: { 'Content-Type': 'application/json',
         Authorization: getToken(),
           },
@@ -43,7 +48,7 @@ export const patchProductos = async (id, data, successCallback, errorCallback) =
 export const deleteProductos = async (id, successCallback, errorCallback) => {
     const options = {
         method: 'DELETE',
-        url: `http://localhost:5000/productos/${id}/`,
+        url: `${urlFija}/productos/${id}/`,
         headers: { 'Content-Type': 'application/json',
         Authorization: getToken(),
     },
