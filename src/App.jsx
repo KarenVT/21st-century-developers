@@ -21,7 +21,7 @@ function App() {
       clientId="lBgjMzJEBs4GZS9XP7FQ27iJw7kYDe4j"
       // aqui se agrega la audiencia para poder pedir el token
       audience="api-autenticacion"
-      redirectUri="https://radiant-temple-64052.herokuapp.com/admin"
+      redirectUri={window.location.origin}
     >
       <div className="app">
         <UserContext.Provider value={{ userData, setUserData }}>
