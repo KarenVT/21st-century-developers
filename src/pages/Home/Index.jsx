@@ -6,7 +6,7 @@ const Index = () => {
             <section className="  text-paleta6 bg-paleta5 bg-opacity-50 p-5 h-auto rounded-md">
                 <div  className="flex justify-center items-center">
 
-                    <img src="../../media/logo.svg" alt="logo de la Empresa" className="w-2/5 h-2/5" />
+                    <link  alt="logo de la Empresa" className=" img4 w-2/5 h-2/5" />
                 </div>
                 <h1 className="m-4 text-center text-6xl text-paleta6">Moda Express
                 </h1>
