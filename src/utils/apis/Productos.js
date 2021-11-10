@@ -2,7 +2,7 @@ import axios from "axios";
 
 // url con heroku
 // const urlFija = "http://localhost:5000" ------> servidor local
-export const urlFija = "https://enigmatic-beyond-44695.herokuapp.com"
+export const urlFija = "https://evening-springs-30883.herokuapp.com"
 
 //esta es la constante para llamar el token
 const getToken =() => {

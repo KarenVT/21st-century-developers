@@ -21,7 +21,7 @@ function App() {
       clientId="lBgjMzJEBs4GZS9XP7FQ27iJw7kYDe4j"
       // aqui se agrega la audiencia para poder pedir el token
       audience="api-autenticacion"
-      redirectUri="https://enigmatic-beyond-44695.herokuapp.com/Admin"
+      redirectUri="https://evening-springs-30883.herokuapp.com/Admin"
     >
       <div className="app">
         <UserContext.Provider value={{ userData, setUserData }}>

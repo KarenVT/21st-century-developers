@@ -11,7 +11,7 @@ const Navbar = () => {
     const { user, logout } = useAuth0();
     //este codigo me sirve para que el Local Storage borre el token que guardo y vuelva a pedir el Token
     const cerrarsesion = () => {
-        logout({ returnTo: "https://enigmatic-beyond-44695.herokuapp.com/Admin" });
+        logout({ returnTo: "https://evening-springs-30883.herokuapp.com/Admin" });
         localStorage.setItem("token", null);
     };
 
