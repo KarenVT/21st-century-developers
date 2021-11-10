@@ -1,5 +1,5 @@
 import axios from "axios";
-import { urlFija } from "./Productos";
+
 
 
 const getToken = () => {
@@ -10,7 +10,7 @@ const getToken = () => {
 export const getUsuarios = async (successCallback, errorCallback) => {
   const options = {
     method: 'GET',
-    url: `${urlFija}/usuarios/`,
+    url: 'https://evening-springs-30883.herokuapp.com/usuarios/',
     headers: {
       Authorization: getToken(),
     },
@@ -21,7 +21,7 @@ export const getUsuarios = async (successCallback, errorCallback) => {
 export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
   const options = {
     method: 'GET',
-    url: `${urlFija}/usuarios/self`,
+    url: 'https://evening-springs-30883.herokuapp.com/usuarios/self',
     headers: {
       Authorization: getToken(), // 3. enviarle el token a backend
     },
@@ -32,7 +32,7 @@ export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
 export const patchUsuarios = async (id, data, successCallback, errorCallback) => {
   const options = {
     method: 'PATCH',
-    url: `${urlFija}/usuarios/${id}/`,
+    url: `https://evening-springs-30883.herokuapp.com/usuarios/${id}/`,
     headers: { 'Content-Type': 'application/json', Authorization: getToken() },
     data,
   };
@@ -42,7 +42,7 @@ export const patchUsuarios = async (id, data, successCallback, errorCallback) =>
 export const deleteUsuarios = async (id, successCallback, errorCallback) => {
   const options = {
       method: 'DELETE',
-      url: `${urlFija}/usuarios/${id}/`,
+      url: `https://evening-springs-30883.herokuapp.com/usuarios/${id}/`,
       headers: { 'Content-Type': 'application/json',
       Authorization: getToken(),
   },
