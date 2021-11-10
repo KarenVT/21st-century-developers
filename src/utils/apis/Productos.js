@@ -2,7 +2,7 @@ import axios from "axios";
 
 // url con heroku
 // const urlFija = "http://localhost:5000" ------> servidor local
-// export const urlFija = "https://evening-springs-30883.herokuapp.com"
+// export const urlFija = "https://fathomless-refuge-65603.herokuapp.com"
 
 //esta es la constante para llamar el token
 const getToken =() => {
@@ -12,7 +12,7 @@ const getToken =() => {
 export const getProductos = async (successCallback, errorCallback) => {
     const options = {
         method: 'GET',
-        url: 'https://evening-springs-30883.herokuapp.com/productos/',
+        url: 'https://fathomless-refuge-65603.herokuapp.com/productos/',
         headers: {
             Authorization: getToken(),
           },
@@ -24,7 +24,7 @@ export const getProductos = async (successCallback, errorCallback) => {
 export const postProductos = async (data, successCallback, errorCallback) => {
     const options = {
         method: 'POST',
-        url: 'https://evening-springs-30883.herokuapp.com/productos/',
+        url: 'https://fathomless-refuge-65603.herokuapp.com/productos/',
         headers: { 'Content-Type': 'application/json',
          Authorization: getToken(),
     },
@@ -36,7 +36,7 @@ export const postProductos = async (data, successCallback, errorCallback) => {
 export const patchProductos = async (id, data, successCallback, errorCallback) => {
     const options = {
         method: 'PATCH',
-        url: `https://evening-springs-30883.herokuapp.com/productos/${id}/`,
+        url: `https://fathomless-refuge-65603.herokuapp.com/productos/${id}/`,
         headers: { 'Content-Type': 'application/json',
         Authorization: getToken(),
           },
@@ -48,7 +48,7 @@ export const patchProductos = async (id, data, successCallback, errorCallback) =
 export const deleteProductos = async (id, successCallback, errorCallback) => {
     const options = {
         method: 'DELETE',
-        url: `https://evening-springs-30883.herokuapp.com/productos/${id}/`,
+        url: `https://fathomless-refuge-65603.herokuapp.com/productos/${id}/`,
         headers: { 'Content-Type': 'application/json',
         Authorization: getToken(),
     },

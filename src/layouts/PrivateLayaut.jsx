@@ -36,8 +36,7 @@ const PrivateLayaut = ({ children }) => {
         (err) => {
           console.log('err', err);
           setLoadingUserInformation(false);
-          logout({ returnTo: "https://evening-springs-30883.herokuapp.com/admin" });
-          
+          logout({ returnTo: "https://fathomless-refuge-65603.herokuapp.com/admin" });
         }
       );
     };

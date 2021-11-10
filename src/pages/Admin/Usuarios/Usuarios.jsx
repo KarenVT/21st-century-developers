@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUsuarios, patchUsuarios, deleteUsuarios } from '../../../utils/apis/Usuarios';
+import { getUsuarios, patchUsuarios } from '../../../utils/apis/Usuarios';
 import { nanoid } from 'nanoid';
 import PrivateComponent from "../../../components/PrivateComponent";
 
