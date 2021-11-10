@@ -53,9 +53,9 @@ const Navbar = () => {
                                     >Iniciar Sesión</button>
                                 </i>
 
-                                <Link to="/Admin/Ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Ventas</Link>
+                                <Link to="/admin/ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Ventas</Link>
 
-                                <Link to="/Admin/Productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Productos</Link>
+                                <Link to="/admin/productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Productos</Link>
 
                             </div>
                         </div>
@@ -79,9 +79,9 @@ const Navbar = () => {
                                     {mostrarPerfil && (
                                         <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" >
 
-                                            <i to="/Admin/Usuarios" className="block m-2 px-4 py-2 text-principal bg-paleta3 bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">{user.name}</i>
+                                            <i to="/admin/usuarios" className="block m-2 px-4 py-2 text-principal bg-paleta3 bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">{user.name}</i>
 
-                                            <Link to="/Admin/Usuarios" className="block m-2 px-4 py-2 text-principal hover:bg-paleta3 hover:bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">Usuarios</Link>
+                                            <Link to="/admin/usuarios" className="block m-2 px-4 py-2 text-principal hover:bg-paleta3 hover:bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">Usuarios</Link>
 
                                             <i id="boton" type="button" className="block m-2 px-4 py-2 bg-principal text-white hover:bg-paleta3 hover:bg-opacity-40  rounded-md text-sm font-medium">
                                                 <button onClick={() => cerrarsesion()}
@@ -110,9 +110,9 @@ const Navbar = () => {
                                 onClick={() => loginWithRedirect()}
                             >Iniciar Sesión</button>
                         </i>
-                        <Link to="/Admin/Ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Ventas</Link>
+                        <Link to="/admin/ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Ventas</Link>
 
-                        <Link to="/Admin/Productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Productos</Link>
+                        <Link to="/admin/productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Productos</Link>
                     </div>
                 </div>
             )}

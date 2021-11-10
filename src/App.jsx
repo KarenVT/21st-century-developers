@@ -27,31 +27,31 @@ function App() {
         <UserContext.Provider value={{ userData, setUserData }}>
           <Router>
             <Switch>
-              <Route path={['/Admin', '/Admin/Ventas', '/Admin/Productos', '/Roles', '/Admin/Usuarios']}>
+              <Route path={['/admin', '/admin/ventas', '/admin/productos', '/Roles', '/admin/usuarios']}>
                 <PrivateLayaut>
                   <Switch>
                     <Route path='/Roles'>
                       <Roles />
                     </Route>
 
-                    <Route path='/Admin/Productos'>
+                    <Route path='/admin/productos'>
                       {/* poner una ruta privada */}
                       <PrivateRoute roleList={["admin"]}>
                         <Productos />
                       </PrivateRoute>
                     </Route>
-                    <Route path='/Admin/Ventas'>
+                    <Route path='/admin/Ventas'>
                       <PrivateRoute roleList={["admin", "vendedor"]}>
                         <Ventas />
                       </PrivateRoute>
                     </Route>
-                    <Route path='/Admin/Usuarios'>
+                    <Route path='/admin/Usuarios'>
                       {/* poner una ruta privada */}
                       <PrivateRoute roleList={["admin"]}>
                         <Usuarios />
                       </PrivateRoute>
                     </Route>
-                    <Route path='/Admin'>
+                    <Route path='/admin'>
                       <PrivateRoute roleList={["admin"]}>
                         <Admin />
                       </PrivateRoute>
