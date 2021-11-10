@@ -36,7 +36,7 @@ const PrivateLayaut = ({ children }) => {
         (err) => {
           console.log('err', err);
           setLoadingUserInformation(false);
-          logout({ returnTo: window.location.origin });
+          logout({ returnTo: "https://enigmatic-beyond-44695.herokuapp.com/Admin" });
           
         }
       );
