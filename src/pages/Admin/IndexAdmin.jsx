@@ -11,13 +11,13 @@ const Admin = () => {
                 </Link>
             </div>
             <div className="img2 flex-col h-screen">
-                <Link to="/Admin/Ventas">
+                <Link to="/admin/ventas">
                     <button className="bg-opacity-80  items-center text-white  text-3xl  bg-principal p-2 w-full hover:bg-principal hover:bg-opacity-50">Administración ventas</button>
                 </Link>
                 
             </div>
             <div className="img3 flex-col w-full h-full ">
-                <Link to="/Admin/Usuarios">
+                <Link to="/admin/usuarios">
                     <button className="bg-opacity-80  items-center text-white  text-3xl  bg-principal p-2 w-full hover:bg-principal hover:bg-opacity-50">Administración Usuarios</button>
                 </Link>
             </div>

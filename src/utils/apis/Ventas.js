@@ -1,14 +1,17 @@
 import axios from "axios";
+import { urlFija } from "./Productos";
+
+
 
 const getToken = () => {
-    return `bearer ${localStorage.getItem("token")}`;
+    return `Bearer ${localStorage.getItem("token")}`;
 };
 
 //CRUD DE VENTAS
 export const getVentas = async (successCallback, errorCallback) => {
     const options = {
         method: 'GET',
-        url: 'http://localhost:5000/ventas/',
+        url: 'https://fathomless-refuge-65603.herokuapp.com/ventas/',
         headers: {
             Authorization: getToken(),
         },
@@ -21,7 +24,7 @@ export const postVentas = async (data, resCallBack, errorCallBack) => {
 
     const options = {
         method: 'POST',
-        url: 'http://localhost:5000/Ventas/',
+        url: 'https://fathomless-refuge-65603.herokuapp.com/Ventas/',
         headers: {
             'Content-Type': 'application/json',
             Authorization: getToken(),
@@ -37,7 +40,7 @@ export const postVentas = async (data, resCallBack, errorCallBack) => {
 export const patchVentas = async (id, data, resCallBack, errorCallBack) => {
     const options = {
         method: 'PATCH',
-        url: `http://localhost:5000/ventas/${id}/`,
+        url: `https://fathomless-refuge-65603.herokuapp.com/ventas/${id}/`,
         headers: {
             'Content-Type': 'application/json', Authorization: getToken()
         },
@@ -51,7 +54,7 @@ export const patchVentas = async (id, data, resCallBack, errorCallBack) => {
 export const deleteVentas = async (id, resCallBack, errorCallBack) => {
     const options = {
         method: 'DELETE',
-        url: `http://localhost:5000/ventas/${id}/`,
+        url: `https://fathomless-refuge-65603.herokuapp.com/ventas/${id}/`,
         headers: {
             'Content-Type': 'application/json',
             Authorization: getToken()

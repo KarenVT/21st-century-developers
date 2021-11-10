@@ -11,7 +11,7 @@ const Navbar = () => {
     const { user, logout } = useAuth0();
     //este codigo me sirve para que el Local Storage borre el token que guardo y vuelva a pedir el Token
     const cerrarsesion = () => {
-        logout({ returnTo: window.location.origin });
+        logout({ returnTo: "https://fathomless-refuge-65603.herokuapp.com/admin" });
         localStorage.setItem("token", null);
     };
 
@@ -41,8 +41,9 @@ const Navbar = () => {
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                         {/*  */}
 
-                        <div className="flex-shrink-0 flex items-center">
-                            <Link to="/Home/Index" className="text-2xl text-principal" htmlFor="">Moda Express</Link>
+                        <div className="flex items-center">
+                            <Link to="/Home/Index" className="text-2xl text-principal" >Moda Express
+                            </Link>
                         </div>
                         <div className="hidden sm:block sm:ml-6">
                             <div className="flex space-x-4">
@@ -52,9 +53,9 @@ const Navbar = () => {
                                     >Iniciar Sesión</button>
                                 </i>
 
-                                <Link to="/Admin/Ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Ventas</Link>
+                                <Link to="/admin/ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Ventas</Link>
 
-                                <Link to="/Admin/Productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Productos</Link>
+                                <Link to="/admin/productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40  px-3 py-2 rounded-md text-sm font-medium" htmlFor="">Productos</Link>
 
                             </div>
                         </div>
@@ -71,16 +72,16 @@ const Navbar = () => {
                                     >
                                         <span className="sr-only">Abrir Perfil</span>
                                         <>
-                                            <img src={user.picture} className='h-10 w-10 rounded-full' />
+                                            <img src={user.picture} className='h-10 w-10 rounded-full' alt="imagen de su cuenta de perfil" />
                                         </>
                                     </button>
 
                                     {mostrarPerfil && (
                                         <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" >
 
-                                        <i to="/Admin/Usuarios" className="block m-2 px-4 py-2 text-principal bg-paleta3 bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">{user.name}</i>
+                                            <i to="/admin/usuarios" className="block m-2 px-4 py-2 text-principal bg-paleta3 bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">{user.name}</i>
 
-                                            <Link to="/Admin/Usuarios" className="block m-2 px-4 py-2 text-principal hover:bg-paleta3 hover:bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">Usuarios</Link>
+                                            <Link to="/admin/usuarios" className="block m-2 px-4 py-2 text-principal hover:bg-paleta3 hover:bg-opacity-40 rounded-md text-sm font-medium" htmlFor="">Usuarios</Link>
 
                                             <i id="boton" type="button" className="block m-2 px-4 py-2 bg-principal text-white hover:bg-paleta3 hover:bg-opacity-40  rounded-md text-sm font-medium">
                                                 <button onClick={() => cerrarsesion()}
@@ -109,9 +110,9 @@ const Navbar = () => {
                                 onClick={() => loginWithRedirect()}
                             >Iniciar Sesión</button>
                         </i>
-                        <Link to="/Admin/Ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Ventas</Link>
+                        <Link to="/admin/ventas" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Ventas</Link>
 
-                        <Link to="/Admin/Productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Productos</Link>
+                        <Link to="/admin/productos" className="text-principal hover:bg-paleta3 hover:bg-opacity-40 block px-3 py-2 rounded-md text-base font-medium">Productos</Link>
                     </div>
                 </div>
             )}
