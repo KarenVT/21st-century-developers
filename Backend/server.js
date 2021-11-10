@@ -1,12 +1,15 @@
 import Express from "express";
 import Cors from "cors";
 import dotenv from "dotenv";
+import jwks from "jwks-rsa";
+import jwt from "express-jwt";
+
 import { ConectarBD } from "./db/db.js";
 import rutasVentas from "./views/Ventas/rutasVentas.js";
 import rutasProductos from "./views/Productos/rutasProductos.js";
 import rutasUsuarios from "./views/Usuarios/rutasUsuarios.js";
-import jwt from "express-jwt";
-import jwks from "jwks-rsa";
+import autenticacionUsuario from "./Middleware/autenticacionUsuario.js";
+
 dotenv.config({ path: './.env' });
 
 
@@ -32,7 +35,7 @@ app.use(jwtCheck);
 
 // aquí termina la primera parte de la autenticación del Backend
 
-
+app.use(autenticacionUsuario);
 
 app.use(rutasVentas);
 app.use(rutasProductos);
