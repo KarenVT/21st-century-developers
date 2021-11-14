@@ -3,15 +3,20 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "engines": {
+        "node": "14.18.1",
+        "yarn": "1.22.17"
+    },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon server.js"
+        "start": "node server.js"
+
     },
     "keywords": [],
-    "author": "",
+    "author": "Mileny Suarez <sgmileny755@gmail.com>",
     "license": "ISC",
     "type": "module",
     "dependencies": {
+        "@types/express": "^4.17.13",
         "cors": "^2.8.5",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
@@ -25,8 +30,5 @@
     },
     "devDependencies": {
         "nodemon": "^2.0.13"
-    },
-    "engines": {
-        "node": "14.18.1"
     }
 }
